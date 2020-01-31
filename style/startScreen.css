@@ -1,0 +1,37 @@
+/* #startScreen {
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gamemode {
+    min-width: 10vw;
+    max-width: 25vw;
+    height: 10vh;
+    margin: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: #111111;
+    border-radius: 7px;
+    user-select: none;
+}
+
+.gamemode .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.gamemode i {
+    margin: 0 .25vw 0 0;
+} */
