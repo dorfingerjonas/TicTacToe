@@ -1,3 +1,6 @@
+let isXTurn = true;
+let gameOver = false;
+
 window.addEventListener('load', () => {
 function buildGrid() {
     const wrapper = document.getElementById('gameWindow');
