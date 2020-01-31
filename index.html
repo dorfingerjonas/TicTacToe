@@ -9,68 +9,54 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSS Files -->
     <link rel="stylesheet" href="./style/main.css">
-    <link rel="stylesheet" href="./style/drawCross.css">
-    <link rel="stylesheet" href="./style/drawCircle.css">
-    <link rel="stylesheet" href="./style/gameWindow.css">
     <link rel="stylesheet" href="./style/startScreen.css">
-    <!-- JavaScript Files -->
-    <script src="./script/main.js"></script>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <!-- Libraries -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://kit.fontawesome.com/e7df220bd7.js" crossorigin="anonymous"></script>
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
 </head>
 <body>
-    <!-- <div id="startScreen">
+    <div id="startScreen">
         <header>
             <h1>TicTacToe</h1>
         </header>
 
         <div class="content">
-            <div class="gamemode">
-                <div class="icons">
-                    <i class="fas fa-user"></i>
-                    <i class="fas fa-globe"></i>
-                    <i class="fas fa-user"></i>
+            <a href="./online/index.html">
+                <div class="gamemode" id="onlineBtn">
+                    <div class="icons">
+                        <i class="fas fa-user"></i>
+                        <i class="fas fa-globe"></i>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>play online</span>
                 </div>
-                <span>online spielen</span>
-            </div>
+            </a>
 
-            <div class="gamemode">
-                <div class="icons">
-                    <i class="fas fa-user"></i>
-                    <i class="fas fa-globe"></i>
-                    <i class="fas fa-user"></i>
+            <a href="./local/index.html">
+                <div class="gamemode" id="localBtn">
+                    <div class="icons">
+                        <i class="fas fa-user"></i>
+                        <i class="fas fa-globe"></i>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>play local</span>
                 </div>
-                <span>lokal spielen</span>
-            </div>
+            </a>
 
-            <div class="gamemode">
-                <div class="icons">
-                    <i class="fas fa-user"></i>
-                    <i class="fas fa-globe"></i>
-                    <i class="fas fa-user"></i>
+            <a href="./offline/index.html">
+                <div class="gamemode" id="offlineBtn">
+                    <div class="icons">
+                        <i class="fas fa-user"></i>
+                        <i class="fas fa-globe"></i>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span>play offline</span>
                 </div>
-                <span>offline spielen</span>
-            </div>
+            </a>
         </div>
-    </div> -->
 
-    <div id="gameWindow"></div>
-
-    <div id="buttonBar">
-        <div class="button" id="resetGameBtn">Reset Game</div>
-        <div class="button" id="menuBtn">Menu</div>
-    </div>
-
-    <div id="resultBar">
-        <p id="resultText">cross' turn</p>
+        <footer>
+            <span>made by <a href="https://dorfingerjonas.github.io/">Jonas Dorfinger</a></span>
+        </footer>
     </div>
 </body>
 </html>
