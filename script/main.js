@@ -142,4 +142,21 @@ function checkThreeInOneRow(symbol) {
 
     return [contains, winningOrder];
 }
+
+function resetGame() {
+    const resultText = document.getElementById('resultText');
+
+    for (let i = 0; i < 9; i++) {
+        const cell = document.getElementById(`cell${i + 1}`);
+
+        cell.symbol = '';
+        cell.isUsed = false;
+        isXTurn = true;
+        gameOver = false;
+
+        while (cell.firstChild) cell.removeChild(cell.firstChild);
+
+        resultText.innerHTML = '&nbsp;';
+    }
+}
 }
