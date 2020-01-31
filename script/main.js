@@ -65,8 +65,6 @@ function addEventListenersToCells() {
                         }, 500);
                     }
 
-                    console.log(areThreeInARow);
-
                     setTimeout(() => {
                         if (checkIfGameIsDraw() && !gameOver) {
                             resultText.textContent = `draw, no one has won.`;
@@ -107,7 +105,7 @@ function drawCross(cell) {
     const line2 = document.createElement('div');
     const animation = 'line 250ms ease-in-out 300ms forwards';
 
-    lineWrapper.classList.add('lineWrapper');
+    lineWrapper.classList.add('cross');
     line1.classList.add('line1');
     line2.classList.add('line2');
 
