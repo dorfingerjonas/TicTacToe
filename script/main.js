@@ -82,4 +82,22 @@ function drawCircle(cell) {
     circle.appendChild(circleLeft);
     cell.appendChild(circle);
 }
+
+function drawCross(cell) {
+    const lineWrapper = document.createElement('div')
+    const line1 = document.createElement('div');
+    const line2 = document.createElement('div');
+    const animation = 'line 250ms ease-in-out 300ms forwards';
+
+    lineWrapper.classList.add('lineWrapper');
+    line1.classList.add('line1');
+    line2.classList.add('line2');
+
+    lineWrapper.appendChild(line1);
+    lineWrapper.appendChild(line2);
+    cell.appendChild(lineWrapper);
+
+    line1.style.animation = animation;
+    line2.style.animation = animation;
+}
 }
