@@ -187,7 +187,7 @@ function checkIfGameIsDraw() {
     return isDraw;
 }
 
-function higlightWinningRow(data, symbol) {
+function highlightWinningRow(data, symbol) {
     for (let i = 0; i < 9; i++) {
         if (i + 1 != data[1][0] && i + 1 != data[1][1] && i + 1 != data[1][2]) {
             if (document.getElementById(`cell${i + 1}`).childNodes[0] !== undefined) {
