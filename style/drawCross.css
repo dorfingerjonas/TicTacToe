@@ -1,0 +1,28 @@
+.lineWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.line1, .line2{
+    position: absolute;
+    border-top: .4vw solid #fff;
+    transform: rotate(45deg);
+    transform-origin: 50% 50%;
+}
+
+.line2 {
+    transform: rotate(-45deg);
+}
+
+@keyframes line{
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 8vw;
+    }
+}
