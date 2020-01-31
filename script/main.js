@@ -61,7 +61,7 @@ function addEventListenersToCells() {
                         console.log(`${symbol} has won.`);
                         resultText.textContent = `${symbol} has won.`;
                         setTimeout(() => {
-                            highlightWinningRow(areThreeInARow, symbol);
+                            delightLosingRows(areThreeInARow);
                         }, 500);
                     }
 
@@ -190,14 +190,12 @@ function checkIfGameIsDraw() {
     return isDraw;
 }
 
-function highlightWinningRow(data, symbol) {
+function delightLosingRows(data) {
     for (let i = 0; i < 9; i++) {
         if (i + 1 != data[1][0] && i + 1 != data[1][1] && i + 1 != data[1][2]) {
             if (document.getElementById(`cell${i + 1}`).childNodes[0] !== undefined) {
                 document.getElementById(`cell${i + 1}`).childNodes[0].classList.add('lowlight');
             }
-        } else {
-            document.getElementById(`cell${i + 1}`).getElementsByClassName(symbol)[0].classList.add('highlight');
         }
     }
 }
