@@ -21,7 +21,7 @@ function buildGrid() {
     }
 }
 
-});function addEventListenersToCells() {
+function addEventListenersToCells() {
     const resultText = document.getElementById('resultText');
 
     for (let i = 0; i < 9; i++) {
@@ -66,6 +66,8 @@ function buildGrid() {
             }
         });
     }
+}
+
 function drawCircle(cell) {
     const circle = document.createElement('div');
     const circleRight = document.createElement('div');
