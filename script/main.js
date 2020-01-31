@@ -2,6 +2,14 @@ let isXTurn = true;
 let gameOver = false;
 
 window.addEventListener('load', () => {
+    const resetGameBtn = document.getElementById('resetGameBtn');
+
+    buildGrid();
+    addEventListenersToCells();
+
+    resetGameBtn.addEventListener('click', resetGame);
+});
+
 function buildGrid() {
     const wrapper = document.getElementById('gameWindow');
     let row = document.createElement('div');
