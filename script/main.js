@@ -114,4 +114,32 @@ function getCellIndizesOfOneSymbol(symbol) {
 
     return result;
 }
+
+function checkThreeInOneRow(symbol) {
+    const winningPosibilities = [
+        ['1', '2', '3'],
+        ['4', '5', '6'],
+        ['7', '8', '9'],
+        ['1', '4', '7'],
+        ['2', '5', '8'],
+        ['3', '6', '9'],
+        ['1', '5', '9'],
+        ['3', '5', '7']
+    ];
+
+    const cellIndizes = getCellIndizesOfOneSymbol(symbol);
+    let contains = false;
+    let winningOrder = [];
+
+    for (const posibility of winningPosibilities) {
+        if (cellIndizes.includes(posibility[0]) &&
+            cellIndizes.includes(posibility[1]) &&
+            cellIndizes.includes(posibility[2]) ) {
+            contains = true;
+            winningOrder = posibility;
+        }
+    }
+
+    return [contains, winningOrder];
+}
 }
