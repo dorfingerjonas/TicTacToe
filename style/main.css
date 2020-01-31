@@ -1,6 +1,17 @@
 body {
     width: 100vw;
     height: 100vh;
+    margin: 0;
     overflow: hidden;
-    font-family: 'Assistant', sans-serif;
+    font-family: 'Muli', sans-serif;
+    background: #91cfa1;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hide {
+    display: none;
 }
