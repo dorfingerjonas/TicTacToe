@@ -1,17 +1,26 @@
+@font-face {
+    font-family: 'Muli';
+    src: url('../fonts/muli.ttf');
+  }
+
 body {
     width: 100vw;
     height: 100vh;
     margin: 0;
     overflow: hidden;
     font-family: 'Muli', sans-serif;
-    background: #91cfa1;
     color: #fff;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
 }
 
 .hide {
     display: none;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }
