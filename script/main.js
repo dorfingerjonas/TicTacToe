@@ -63,4 +63,23 @@ function buildGrid() {
             }
         });
     }
+function drawCircle(cell) {
+    const circle = document.createElement('div');
+    const circleRight = document.createElement('div');
+    const circleLeft = document.createElement('div');
+    const wholeCircleRight = document.createElement('div');
+    const wholeCircleLeft = document.createElement('div');
+
+    circle.setAttribute('class', 'circle');
+    circleRight.setAttribute('class', 'circleWrapper circleWrapperRight');
+    circleLeft.setAttribute('class', 'circleWrapper circleWrapperLeft');
+    wholeCircleRight.setAttribute('class', 'wholeCircle circleRight');
+    wholeCircleLeft.setAttribute('class', 'wholeCircle circleLeft');
+
+    circleRight.appendChild(wholeCircleRight);
+    circleLeft.appendChild(wholeCircleLeft);
+    circle.appendChild(circleRight);
+    circle.appendChild(circleLeft);
+    cell.appendChild(circle);
+}
 }
