@@ -81,3 +81,7 @@
     cursor: pointer;
     user-select: none;
 }
+
+.lowlight {
+    opacity: .3;
+}
