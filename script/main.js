@@ -159,4 +159,17 @@ function resetGame() {
         resultText.innerHTML = '&nbsp;';
     }
 }
+
+function checkIfGameIsDraw() {
+    let isDraw = true;
+
+    for (let i = 0; i < 9; i++) {
+        const cell = document.getElementById(`cell${i + 1}`);
+
+        if (!cell.isUsed) {
+            isDraw = false;
+        }
+    }
+
+    return isDraw;
 }
