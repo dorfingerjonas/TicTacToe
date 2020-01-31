@@ -100,4 +100,18 @@ function drawCross(cell) {
     line1.style.animation = animation;
     line2.style.animation = animation;
 }
+
+function getCellIndizesOfOneSymbol(symbol) {
+    let result = '';
+
+    for (let i = 0; i < 9; i++) {
+        const cell = document.getElementById(`cell${i+1}`);
+
+        if (cell.symbol === symbol) {
+            result += (i + 1).toString();
+        }
+    }
+
+    return result;
+}
 }
