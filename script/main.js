@@ -58,6 +58,9 @@ function addEventListenersToCells() {
                         gameOver = true;
                         console.log(`${symbol} has won.`);
                         resultText.textContent = `${symbol} has won.`;
+                        setTimeout(() => {
+                            highlightWinningRow(areThreeInARow, symbol);
+                        }, 500);
                     }
 
                     console.log(areThreeInARow);
