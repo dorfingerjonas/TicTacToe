@@ -43,9 +43,11 @@ function addEventListenersToCells() {
                     if (isXTurn) {
                         drawCross(cell);
                         symbol = 'cross';
+                        resultText.textContent = "circle's turn";
                     } else {
                         drawCircle(cell);
                         symbol = 'circle';
+                        resultText.textContent = "cross' turn";
                     }
 
                     isXTurn = !isXTurn;
