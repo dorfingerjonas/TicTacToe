@@ -18,4 +18,49 @@ function buildGrid() {
     }
 }
 
-});
+});function addEventListenersToCells() {
+    const resultText = document.getElementById('resultText');
+
+    for (let i = 0; i < 9; i++) {
+        const cell = document.getElementById(`cell${i+1}`);
+
+        cell.addEventListener('click', () => {
+            if (!gameOver) {
+                if (!cell.isUsed) {
+                    let symbol;
+
+                    if (isXTurn) {
+                        drawCross(cell);
+                        symbol = 'cross';
+                    } else {
+                        drawCircle(cell);
+                        symbol = 'circle';
+                    }
+
+                    isXTurn = !isXTurn;
+                    cell.isUsed = true;
+                    cell.symbol = symbol;
+
+                    let areThreeInARow = checkThreeInOneRow(symbol);
+
+                    if (areThreeInARow[0]) {
+                        gameOver = true;
+                        console.log(`${symbol} has won.`);
+                        resultText.textContent = `${symbol} has won.`;
+                    }
+
+                    console.log(areThreeInARow);
+
+                    setTimeout(() => {
+                        if (checkIfGameIsDraw() && !gameOver) {
+                            resultText.textContent = `draw, no one has won.`;
+                            gameOver = true;
+                        }
+                    }, 550);
+                } else {
+                    console.log('sorry, this field is already used');
+                }
+            }
+        });
+    }
+}
