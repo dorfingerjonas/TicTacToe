@@ -24,6 +24,38 @@
 </head>
 <body>
     <h1>This gamemode is currently in progress. It will be released very soon.</h1>
+    <div id="signupScreen">
+        <div>
+            <input type="text" placeholder="username" id="usernameInput">
+            <div class="button" id="continueBtn">signup</div>
+        </div>
+
+        <div id="playersToChallenge" class="disable">
+            <div id="loader">
+                <div class="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="requestWindow" class="hide">
+            <h2 id="requestHeadliner">you got a game request!</h2>
+            <p id="requestText"></p>
+
+            <div id="buttonWrapper">
+                <div class="requestButton" id="acceptRequest">
+                    <span>accept</span>
+                </div>
+    
+                <div class="requestButton" id="declineRequest">
+                    <span>decline</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="loader">
         <div class="lds-ellipsis">
