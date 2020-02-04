@@ -24,3 +24,7 @@ a {
     color: white;
     text-decoration: none;
 }
+
+.disable {
+    opacity: .4 !important;
+}
