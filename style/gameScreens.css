@@ -14,18 +14,6 @@
     margin: 5vh 0 .5vh 0;
 }
 
-.button {
-    padding: 1.5vh;
-    width: auto;
-    text-align: center;
-    background: transparent;
-    box-shadow: 1px 1px 4px 1px #4c6d91;
-    border-radius: 5px;
-    font-size: 1.25vw;
-    cursor: pointer;
-    user-select: none;
-}
-
 .lowlight {
     opacity: .3;
 }
