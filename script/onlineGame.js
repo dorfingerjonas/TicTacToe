@@ -361,3 +361,18 @@ function createWaitingPlayer(playerData) {
 
     return player;
 }
+
+function addEventListenerForChangesAtTheGrid() {
+    firebase.database().ref(`games/playing/${gameID}`).on('value', (snapshot) => {
+        const data = snapshot.val();
+        console.log(data);
+        console.log(isEnimesTurn);
+        
+        if (data['nextTurn'].clickedCell > 0) {
+            isEnimesTurn = data['nextTurn'].isPlayer1Turn;
+            sessionStorage.setItem('drawnSymbol', data['nextTurn'].drawnSymbol);
+            isEnimesTurn = true;
+            document.getElementById(`cell${data['nextTurn'].clickedCell}`).click();
+        }
+    });
+}
