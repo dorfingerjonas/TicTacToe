@@ -36,9 +36,6 @@ window.addEventListener('load', () => {
     });
 
     firebase.database().ref('games/waitingPlayers').on('value', (snapshot) => {
-        console.log('changes detected');
-        console.log(snapshot.val());
-
         while (playersToChallenge.firstChild) {
             playersToChallenge.removeChild(playersToChallenge.firstChild);
         }
@@ -148,6 +145,12 @@ window.addEventListener('load', () => {
             sessionStorage.removeItem('username');
         }
     });
+
+    if (sessionStorage.getItem('username') === null) {
+        if (firebase.auth().currentUser !== null) {
+            firebase.auth().currentUser.signOut();
+        }
+    }
 });
 
 function login() {
@@ -183,6 +186,8 @@ function buildGrid() {
 
 function addEventListenersToCells() {
     const resultText = document.getElementById('resultText');
+    let nextSymbol = 'cross';
+    let saveDataIsAllowed = false;
 
     for (let i = 0; i < 9; i++) {
         const cell = document.getElementById(`cell${i+1}`);
@@ -191,60 +196,69 @@ function addEventListenersToCells() {
             if (!gameOver) {
                 if (!cell.isUsed) {
                     let currSymbol;
-
+                    
                     if (isEnimesTurn) {
                         if (sessionStorage.getItem('drawnSymbol') === 'cross') {
                             drawCross(cell);
                             currSymbol = 'cross';
-                            resultText.textContent = "circle's turn";
+                            nextSymbol = 'circle';
+                            resultText.textContent = "it is circle's turn";
                         } else if (sessionStorage.getItem('drawnSymbol') === 'circle') {
                             drawCircle(cell);
                             currSymbol = 'circle';
-                            resultText.textContent = "cross' turn";
+                            nextSymbol = 'cross';
+                            resultText.textContent = `it is cross' turn`;
                         }
+
+                        saveDataIsAllowed = true;
                     } else {
-                        if (sessionStorage.getItem('drawnSymbol') !== 'cross') {
-                            drawCross(cell);
-                            currSymbol = 'cross';
-                            resultText.textContent = "circle's turn";
-                        } else if (sessionStorage.getItem('drawnSymbol') !== 'circle') {
-                            drawCircle(cell);
-                            currSymbol = 'circle';
-                            resultText.textContent = "cross' turn";
+                        if (nextSymbol === symbol) {
+                            if (symbol === 'cross') {
+                                drawCross(cell);
+                                currSymbol = 'cross';
+                                nextSymbol = 'circle';
+                                resultText.textContent = "it is circle's turn";
+                            } else {
+                                drawCircle(cell);
+                                currSymbol = 'circle';
+                                nextSymbol = 'cross';
+                                resultText.textContent = `it is cross' turn`;
+                            }
+                            saveDataIsAllowed = true;
                         }
                     }
 
-                    console.log(currSymbol);
+                    if (saveDataIsAllowed) {
+                        cell.isUsed = true;
+                        cell.symbol = currSymbol;
 
-                    isEnimesTurn = !isEnimesTurn;
-                    cell.isUsed = true;
-                    cell.symbol = currSymbol;
+                        firebase.database().ref(`games/playing/${gameID}/nextTurn`).set({
+                            clickedCell: i + 1,
+                            isPlayer1Turn: !isEnimesTurn,
+                            drawnSymbol: currSymbol
+                        });
 
-                    firebase.database().ref(`games/playing/${gameID}/nextTurn`).set({
-                        clickedCell: i + 1,
-                        isPlayer1Turn: isEnimesTurn,
-                        drawnSymbol: currSymbol
-                    });
+                        let areThreeInARow = checkThreeInOneRow(currSymbol);
 
-                    let areThreeInARow = checkThreeInOneRow(currSymbol);
-
-                    if (areThreeInARow[0]) {
-                        gameOver = true;
-                        console.log(`${currSymbol} has won.`);
-                        resultText.textContent = `${currSymbol} has won.`;
-                        setTimeout(() => {
-                            delightLosingRows(areThreeInARow);
-                        }, 500);
-                    }
-
-                    setTimeout(() => {
-                        if (checkIfGameIsDraw() && !gameOver) {
-                            resultText.textContent = `draw, no one has won.`;
+                        if (areThreeInARow[0]) {
                             gameOver = true;
+                            resultText.textContent = `${currSymbol} has won.`;
+                            setTimeout(() => {
+                                delightLosingRows(areThreeInARow);
+                            }, 500);
                         }
-                    }, 550);
+
+                        setTimeout(() => {
+                            if (checkIfGameIsDraw() && !gameOver) {
+                                resultText.textContent = `draw, no one has won.`;
+                                gameOver = true;
+                            }
+                        }, 550);
+                    }
+
+                    saveDataIsAllowed = false;
                 } else {
-                    console.log('sorry, this field is already used');
+                    // Field is already used
                 }
             }
         });
@@ -384,8 +398,6 @@ function createWaitingPlayer(playerData) {
     name.textContent = playerData.username;
 
     player.addEventListener('click', () => {
-        console.log(playerData.username + ' is selected');
-
         firebase.database().ref('games/waitingPlayers/' + playerData.uid + '/gameRequest').set({
             uid: firebase.auth().currentUser.uid
         });
@@ -400,13 +412,10 @@ function createWaitingPlayer(playerData) {
 function addEventListenerForChangesAtTheGrid() {
     firebase.database().ref(`games/playing/${gameID}`).on('value', (snapshot) => {
         const data = snapshot.val();
-        console.log(data);
-        console.log(isEnimesTurn);
         
         if (data['nextTurn'].clickedCell > 0) {
             isEnimesTurn = data['nextTurn'].isPlayer1Turn;
             sessionStorage.setItem('drawnSymbol', data['nextTurn'].drawnSymbol);
-            isEnimesTurn = true;
             document.getElementById(`cell${data['nextTurn'].clickedCell}`).click();
         }
     });
