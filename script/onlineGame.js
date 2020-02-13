@@ -450,6 +450,17 @@ function addEventListenerForChangesAtTheGrid() {
             isEnemiesTurn = data['nextTurn'].isPlayer1Turn;
             sessionStorage.setItem('drawnSymbol', data['nextTurn'].drawnSymbol);
             document.getElementById(`cell${data['nextTurn'].clickedCell}`).click();
+            console.log(data);
+            
+        }
+    });
+
+    firebase.database().ref(`games/playing/${gameID}/playAgain`).on('value', (snapshot) => {
+        if (snapshot.val() !== null) {
+            playAgainAcceptedCounter = snapshot.val()['counter'];
+            playerAcceptedRematchText.textContent = `${playAgainAcceptedCounter}/2`;
+
+            playAgainAcceptedCounter === 2 ? playAgain() : () => {};
         }
     });
 }
