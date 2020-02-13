@@ -447,7 +447,7 @@ function addEventListenerForChangesAtTheGrid() {
         const data = snapshot.val();
         
         if (data['nextTurn'].clickedCell > 0) {
-            isEnimesTurn = data['nextTurn'].isPlayer1Turn;
+            isEnemiesTurn = data['nextTurn'].isPlayer1Turn;
             sessionStorage.setItem('drawnSymbol', data['nextTurn'].drawnSymbol);
             document.getElementById(`cell${data['nextTurn'].clickedCell}`).click();
         }
