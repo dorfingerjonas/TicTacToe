@@ -230,6 +230,7 @@ function addEventListenersToCells() {
                                 nextSymbol = 'cross';
                                 resultText.textContent = `it is cross' turn`;
                             }
+
                             saveDataIsAllowed = true;
                         }
                     }
