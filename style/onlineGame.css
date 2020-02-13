@@ -24,15 +24,20 @@ body {
 }
 
 .button {
+    width: 90%;
     padding: 1.5vh;
-    width: auto;
+    margin-top: 3vh;
     text-align: center;
-    background: transparent;
-    box-shadow: 1px 1px 4px 1px #689974;
+    background: #1b3647;
     border-radius: 5px;
-    font-size: 1.25vw;
+    font-size: 1.2vw;
     cursor: pointer;
     user-select: none;
+    transition: box-shadow 200ms ease-in-out;
+}
+
+.button:hover {
+    box-shadow: 0 0 0 0.3rem #1b364780;
 }
 
 #signupScreen {
