@@ -24,9 +24,6 @@
 </head>
 <body>
     <div id="signupScreen">
-        <div>
-            <input type="text" placeholder="username" id="usernameInput">
-            <div class="button" id="continueBtn">signup</div>
         <h1>enter a username to start playing</h1>
 
         <div class="inputWrapper">
@@ -34,13 +31,17 @@
             <div class="button" id="signUpBtn">signup</div>
         </div>
 
-        <div id="playersToChallenge" class="disable">
-            <div id="loader">
-                <div class="lds-ellipsis">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+        <div id="playersToChallengeWrapper">
+            <p id="challengeText"> &nbsp; </p>
+
+            <div id="playersToChallenge" class="disable">
+                <div id="loader">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
             </div>
         </div>
