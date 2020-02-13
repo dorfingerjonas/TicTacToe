@@ -364,18 +364,35 @@ function playAgainButton() {
     }
 }
 
-    for (let i = 0; i < 9; i++) {
-        const cell = document.getElementById(`cell${i + 1}`);
+function playAgain() {
+    const resultText = document.getElementById('resultText');
+    const gameWindow = document.getElementById('gameWindow');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const buttonText = document.getElementById('playerAcceptedRematchText');
 
-        cell.symbol = '';
-        cell.isUsed = false;
-        isEnimesTurn = true;
-        gameOver = false;
+    firebase.database().ref(`games/playing/${gameID}/nextTurn`).set({
+        clickedCell: -1,
+        isPlayer1Turn: true
+    });
 
-        while (cell.firstChild) cell.removeChild(cell.firstChild);
+    firebase.database().ref(`games/playing/${gameID}/playAgain`).set({
+        counter: 0
+    });
 
-        resultText.innerHTML = "cross' turn";
+    while (gameWindow.firstChild) {
+        gameWindow.removeChild(gameWindow.firstChild);
     }
+
+    buildGrid();
+    addEventListenersToCells();
+
+    console.log(playAgainBtn.isClicked);
+    playAgainBtn.isClicked = false;
+    console.log(playAgainBtn.isClicked);
+    isEnemiesTurn = false;
+    gameOver = false;
+    buttonText.textContent = '0/2';
+    resultText.textContent = "cross' turn";
 }
 
 function back() {
