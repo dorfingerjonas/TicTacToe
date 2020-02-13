@@ -352,8 +352,17 @@ function checkThreeInOneRow(symbol) {
     return [contains, winningOrder];
 }
 
-function resetGame() {
-    const resultText = document.getElementById('resultText');
+function playAgainButton() {
+    const button = document.getElementById('playAgainBtn');
+    
+    if (!button.isClicked) {
+        firebase.database().ref(`games/playing/${gameID}/playAgain`).update({
+            counter: ++playAgainAcceptedCounter
+        });
+    
+        button.isClicked = true;
+    }
+}
 
     for (let i = 0; i < 9; i++) {
         const cell = document.getElementById(`cell${i + 1}`);
