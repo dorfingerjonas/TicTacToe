@@ -75,9 +75,19 @@ input:focus {
     border-color: red;
 }
 
-#playersToChallenge {
+#playersToChallengeWrapper {
     width: 70vw;
-    margin: 10vh 0 0 0;
+    text-align: center;
+}
+
+#playersToChallengeWrapper p {
+    margin: 5vh 0 0 0;
+    font-size: 1.3vw;
+}
+
+#playersToChallenge {
+    width: 100%;
+    margin: 5vh 0 0 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
