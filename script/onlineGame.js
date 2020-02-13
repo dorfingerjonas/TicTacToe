@@ -203,7 +203,7 @@ function addEventListenersToCells() {
                 if (!cell.isUsed) {
                     let currSymbol;
                     
-                    if (isEnimesTurn) {
+                    if (isEnemiesTurn) {
                         if (sessionStorage.getItem('drawnSymbol') === 'cross') {
                             drawCross(cell);
                             currSymbol = 'cross';
