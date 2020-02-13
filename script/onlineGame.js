@@ -27,6 +27,8 @@ window.addEventListener('load', () => {
 
     buildGrid();
     addEventListenersToCells();
+    sessionStorage.setItem('symbol', 'cross');
+    symbol = sessionStorage.getItem('symbol');
 
     resetGameBtn.addEventListener('click', resetGame);
     continueBtn.addEventListener('click', login);
