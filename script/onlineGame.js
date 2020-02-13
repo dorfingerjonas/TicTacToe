@@ -19,6 +19,8 @@ window.addEventListener('load', () => {
     
     firebase.initializeApp(firebaseConfig);
 
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const signUpBtn = document.getElementById('signUpBtn');
     const signupScreen = document.getElementById('signupScreen');
     const gameScreen = document.getElementById('gameScreen');
     const playersToChallenge = document.getElementById('playersToChallenge');
