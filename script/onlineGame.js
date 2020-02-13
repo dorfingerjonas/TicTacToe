@@ -52,9 +52,9 @@ window.addEventListener('load', () => {
         }
         
         if (playersToChallenge.childNodes.length === 0) {
-            const text = document.createElement('p');
-            text.textContent = 'No players are waiting for game.'
-            playersToChallenge.appendChild(text);
+            document.getElementById('challengeText').textContent = 'No players are waiting for game.';
+        } else {
+            document.getElementById('challengeText').textContent = 'Challenge a waiting player.';
         }
     });
 
