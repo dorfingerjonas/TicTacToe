@@ -1,6 +1,6 @@
 let isXTurn = true;
 let gameOver = false;
-let symbol = 'cross';
+let symbol = '';
 let gameID = '';
 let isEnimesTurn = false;
 
