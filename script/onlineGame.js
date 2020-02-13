@@ -140,11 +140,13 @@ window.addEventListener('load', () => {
                 }
             });
 
+            playAgainBtn.isClicked = false;
             signupScreen.classList.add('hide');
             signupScreen.classList.remove('hide');
             playersToChallenge.classList.remove('disable');
         } else {
             signupScreen.classList.add('hide');
+            playersToChallenge.classList.add('disable');
             signupScreen.classList.remove('hide');
             sessionStorage.removeItem('username');
         }
