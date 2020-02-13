@@ -49,6 +49,11 @@ body {
     flex-direction: column;
 }
 
+#signupScreen h1 {
+    position: absolute;
+    top: 10vh;
+}
+
 input {
     outline: none;
     border: none;
