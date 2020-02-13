@@ -30,6 +30,7 @@ window.addEventListener('load', () => {
     sessionStorage.setItem('symbol', 'cross');
     symbol = sessionStorage.getItem('symbol');
 
+    playAgainBtn.addEventListener('click', playAgainButton);
     signUpBtn.addEventListener('click', login);
     window.addEventListener('keydown', (ev) => {
         if (ev.key === 'Enter' && !signupScreen.className.includes('hide')) {
