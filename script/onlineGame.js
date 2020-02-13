@@ -3,6 +3,7 @@ let gameOver = false;
 let symbol = '';
 let gameID = '';
 let isEnemiesTurn = false;
+let playAgainAcceptedCounter = 0;
 
 window.addEventListener('load', () => {
     const firebaseConfig = {
