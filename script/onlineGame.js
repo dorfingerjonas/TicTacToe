@@ -2,7 +2,7 @@ let isXTurn = true;
 let gameOver = false;
 let symbol = '';
 let gameID = '';
-let isEnimesTurn = false;
+let isEnemiesTurn = false;
 
 window.addEventListener('load', () => {
     const firebaseConfig = {
@@ -55,8 +55,8 @@ window.addEventListener('load', () => {
         }
     });
 
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
+    firebase.auth().onAuthStateChanged((user) => {        
+        if (user && sessionStorage.getItem('username') !== null) {
             firebase.database().ref('games/waitingPlayers/' + user.uid).set({
                 username: sessionStorage.getItem('username'),
                 uid: user.uid
@@ -77,8 +77,8 @@ window.addEventListener('load', () => {
                     firebase.database().ref('games/waitingPlayers/' + request[0]).once('value').then((snapshot2) => {
                         requestText.textContent = `${snapshot2.val().username} wants to play with you!`;
                         requestWindow.classList.remove('hide');
-                        sessionStorage.setItem('usernameEnime', snapshot2.val().username);
-                        sessionStorage.setItem('uidEnime', snapshot2.val().uid);
+                        sessionStorage.setItem('usernameEnemy', snapshot2.val().username);
+                        sessionStorage.setItem('uidEnemy', snapshot2.val().uid);
 
                         setTimeout(() => {
                             requestWindow.style.opacity = 1;
@@ -103,11 +103,11 @@ window.addEventListener('load', () => {
 
                         firebase.database().ref('games/playing/' + gameID).set({
                             player1: {username: sessionStorage.getItem('username'), symbol: 'cross', uid: firebase.auth().currentUser.uid},
-                            player2: {username: sessionStorage.getItem('usernameEnime'), symbol: 'circle', uid: sessionStorage.getItem('uidEnime')},
+                            player2: {username: sessionStorage.getItem('usernameEnemy'), symbol: 'circle', uid: sessionStorage.getItem('uidEnemy')},
                             nextTurn: {isPlayer1: true, clickedCell: -1}
                         });
 
-                        firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uidEnime')}`).update({
+                        firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uidEnemy')}`).update({
                             newGame: {hasStarted: true, gameID: gameID}
                         });
 
@@ -119,7 +119,7 @@ window.addEventListener('load', () => {
                         declineRequest.click();
 
                         firebase.database().ref('games/waitingPlayers/' + user.uid).remove();
-                        firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uidEnime')}`).remove();
+                        firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uidEnemy')}`).remove();
                     });
                 }
             });
@@ -127,7 +127,8 @@ window.addEventListener('load', () => {
             firebase.database().ref('games/waitingPlayers/' + user.uid + '/newGame').on('value', (snapshot) => {
                 if (snapshot.val() !== null) {
                     if (snapshot.val()['hasStarted']) {
-                        symbol = 'circle';
+                        sessionStorage.setItem('symbol', 'circle');
+                        symbol = sessionStorage.getItem('symbol');
                         gameID = snapshot.val()['gameID']
                         signupScreen.classList.add('hide');
                         gameScreen.classList.remove('hide');
@@ -234,7 +235,7 @@ function addEventListenersToCells() {
 
                         firebase.database().ref(`games/playing/${gameID}/nextTurn`).set({
                             clickedCell: i + 1,
-                            isPlayer1Turn: !isEnimesTurn,
+                            isPlayer1Turn: !isEnemiesTurn,
                             drawnSymbol: currSymbol
                         });
 
