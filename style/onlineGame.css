@@ -106,12 +106,12 @@ input:focus {
 #requestWindow {
     position: absolute;
     width: 45vw;
-    height: 50vh;
-    top: 25vh;
+    height: 52vh;
+    top: 24vh;
     left: 27.5vw;
-    background: #689974;
-    box-shadow: 1px 1px 4px 1px #689974;
-    border-radius: 5px;
+    background: #fff;
+    color: black;
+    border-radius: 7px;
     font-size: 1.5vw;
     display: flex;
     justify-content: center;
