@@ -356,11 +356,11 @@ function playAgainButton() {
     const button = document.getElementById('playAgainBtn');
     
     if (!button.isClicked) {
-        firebase.database().ref(`games/playing/${gameID}/playAgain`).update({
-            counter: ++playAgainAcceptedCounter
-        });
-    
         button.isClicked = true;
+
+        firebase.database().ref(`games/playing/${gameID}/playAgain`).update({
+            counter: playAgainAcceptedCounter + 1
+        });
     }
 }
 
@@ -386,9 +386,7 @@ function playAgain() {
     buildGrid();
     addEventListenersToCells();
 
-    console.log(playAgainBtn.isClicked);
     playAgainBtn.isClicked = false;
-    console.log(playAgainBtn.isClicked);
     isEnemiesTurn = false;
     gameOver = false;
     buttonText.textContent = '0/2';
@@ -449,9 +447,7 @@ function addEventListenerForChangesAtTheGrid() {
         if (data['nextTurn'].clickedCell > 0) {
             isEnemiesTurn = data['nextTurn'].isPlayer1Turn;
             sessionStorage.setItem('drawnSymbol', data['nextTurn'].drawnSymbol);
-            document.getElementById(`cell${data['nextTurn'].clickedCell}`).click();
-            console.log(data);
-            
+            document.getElementById(`cell${data['nextTurn'].clickedCell}`).click();            
         }
     });
 
@@ -459,7 +455,6 @@ function addEventListenerForChangesAtTheGrid() {
         if (snapshot.val() !== null) {
             playAgainAcceptedCounter = snapshot.val()['counter'];
             playerAcceptedRematchText.textContent = `${playAgainAcceptedCounter}/2`;
-
             playAgainAcceptedCounter === 2 ? playAgain() : () => {};
         }
     });
