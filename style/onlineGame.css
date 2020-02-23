@@ -24,7 +24,7 @@ body {
 }
 
 .button {
-    width: 90%;
+    width: 36%;
     padding: 1.5vh;
     margin-top: 3vh;
     text-align: center;
@@ -122,7 +122,7 @@ input:focus {
     user-select: none;
 }
 
-#requestWindow {
+#requestWindow, #quitWindow {
     position: absolute;
     width: 45vw;
     height: 52vh;
@@ -161,22 +161,36 @@ input:focus {
     user-select: none;
 }
 
-#acceptRequest {
+#acceptRequest, #cancelQuitGame {
     background: #1abc89;
     transition: box-shadow 200ms ease-in-out;
 }
 
-#acceptRequest:hover {
+#acceptRequest:hover, #cancelQuitGame:hover {
     box-shadow: 0 0 0 0.3rem #1abc8980;
 }
 
-#declineRequest {
+#declineRequest, #quitGame {
     background: #c02942;
     transition: box-shadow 200ms ease-in-out;
 }
 
-#declineRequest:hover {
+#declineRequest:hover, #quitGame:hover {
     box-shadow: 0 0 0 0.3rem #c2294280;
+}
+
+#quitHeadliner {
+    text-align: center;
+}
+
+#quitWindow p {
+    text-align: center;
+    width: 80%;
+}
+
+#quitWindow {
+    height: 70vh;
+    top: 17vh;
 }
 
 #signOutBtn {
