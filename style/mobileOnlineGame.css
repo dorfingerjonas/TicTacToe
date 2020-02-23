@@ -15,6 +15,8 @@ body {
 .inputWrapper {
     height: 20vh;
     width: 70vw;
+    position: relative;
+    top: -10vh;
     background: #fff;
     padding: 0 6vw;
     border-radius: 7px;
@@ -45,8 +47,8 @@ body {
 }
 
 #signupScreen h1 {
-    position: absolute;
-    top: 5vh;
+    position: relative;
+    top: -15vh;
     text-align: center;
 }
 
