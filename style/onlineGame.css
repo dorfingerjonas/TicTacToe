@@ -173,3 +173,7 @@ input:focus {
 #declineRequest:hover {
     box-shadow: 0 0 0 0.3rem #c2294280;
 }
+
+#signOutBtn {
+    width: 20%;
+}

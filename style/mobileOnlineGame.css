@@ -202,3 +202,7 @@ input:focus {
 #playAgainBtn, #quitGameRequest {
     font-size: 4.5vw;
 }
+
+#signOutBtn {
+    width: 70%;
+}

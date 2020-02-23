@@ -35,6 +35,7 @@ window.addEventListener("load", () => {
   const gameScreen = document.getElementById("gameScreen");
   const playersToChallenge = document.getElementById("playersToChallenge");
   const quitGameRequest = document.getElementById("quitGameRequest");
+  const signOutBtn = document.getElementById('signOutBtn');
 
   buildGrid();
   addEventListenersToCells();
@@ -44,6 +45,10 @@ window.addEventListener("load", () => {
   playAgainBtn.addEventListener("click", playAgainButton);
   signUpBtn.addEventListener("click", login);
   quitGameRequest.addEventListener("click", openQuitWindow);
+  signOutBtn.addEventListener('click', () => {
+    firebase.auth().signOut();
+  });
+
   window.addEventListener("keydown", ev => {
     if (ev.key === "Enter" && !signupScreen.className.includes("hide")) {
       login();
@@ -230,6 +235,10 @@ window.addEventListener("load", () => {
       playersToChallenge.classList.add("disable");
       signupScreen.classList.remove("hide");
       sessionStorage.removeItem("username");
+      sessionStorage.removeItem("drawnSymbol");
+      sessionStorage.removeItem("usernameEnemy");
+      sessionStorage.removeItem("uidEnemy");
+      sessionStorage.removeItem("symbol");
     }
   });
 
