@@ -20,13 +20,13 @@ window.addEventListener("load", () => {
   firebase.initializeApp(firebaseConfig);
 
   /**
-   * 
-   * 
-   * 
+   *
+   *
+   *
    * TODO: format game ending msg
    * idea: pop up window with the symbl of the winner and user name
-   * 
-   * 
+   *
+   *
    */
 
   const playAgainBtn = document.getElementById("playAgainBtn");
@@ -34,7 +34,7 @@ window.addEventListener("load", () => {
   const signupScreen = document.getElementById("signupScreen");
   const gameScreen = document.getElementById("gameScreen");
   const playersToChallenge = document.getElementById("playersToChallenge");
-  const quitGameRequest = document.getElementById('quitGameRequest');
+  const quitGameRequest = document.getElementById("quitGameRequest");
 
   buildGrid();
   addEventListenersToCells();
@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
 
   playAgainBtn.addEventListener("click", playAgainButton);
   signUpBtn.addEventListener("click", login);
-  quitGameRequest.addEventListener('click', openQuitWindow);
+  quitGameRequest.addEventListener("click", openQuitWindow);
   window.addEventListener("keydown", ev => {
     if (ev.key === "Enter" && !signupScreen.className.includes("hide")) {
       login();
@@ -192,8 +192,8 @@ window.addEventListener("load", () => {
                 )
                 .remove();
 
-                sessionStorage.setItem('symbol', 'cross');
-                symbol = sessionStorage.getItem('symbol');
+              sessionStorage.setItem("symbol", "cross");
+              symbol = sessionStorage.getItem("symbol");
             });
           }
         });
@@ -241,9 +241,13 @@ function login() {
     username.classList.add("errorInput");
   } else {
     if (firebase.auth().currentUser !== null) {
-      firebase.database().ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`).remove().then(() => {
-        firebase.auth().signInAnonymously();
-      });
+      firebase
+        .database()
+        .ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`)
+        .remove()
+        .then(() => {
+          firebase.auth().signInAnonymously();
+        });
     } else {
       firebase.auth().signInAnonymously();
     }
@@ -295,7 +299,9 @@ function addEventListenersToCells() {
               drawCircle(cell);
               currSymbol = "circle";
               nextSymbol = "cross";
-              resultText.textContent = `it's ${formatNameCorrectly(sessionStorage.getItem('usernameEnemy'))} turn`;
+              resultText.textContent = `it's ${formatNameCorrectly(
+                sessionStorage.getItem("usernameEnemy")
+              )} turn`;
             }
 
             saveDataIsAllowed = true;
@@ -311,10 +317,12 @@ function addEventListenersToCells() {
                 nextSymbol = "cross";
               }
 
-              if (nextSymbol === sessionStorage.getItem('symbol')) {
+              if (nextSymbol === sessionStorage.getItem("symbol")) {
                 resultText.textContent = "it's your turn";
               } else {
-                resultText.textContent = `it's ${formatNameCorrectly(sessionStorage.getItem('usernameEnemy'))} turn`;
+                resultText.textContent = `it's ${formatNameCorrectly(
+                  sessionStorage.getItem("usernameEnemy")
+                )} turn`;
               }
 
               saveDataIsAllowed = true;
@@ -490,12 +498,14 @@ function playAgain() {
   isEnemiesTurn = false;
   gameOver = false;
   buttonText.textContent = "0/2";
-  symbol = sessionStorage.getItem('symbol');
+  symbol = sessionStorage.getItem("symbol");
 
-  if (symbol === 'cross' && isXTurn) {
+  if (symbol === "cross" && isXTurn) {
     resultText.textContent = "it's your turn";
   } else {
-    resultText.textContent = `it's ${formatNameCorrectly(sessionStorage.getItem('usernameEnemy'))} turn`;
+    resultText.textContent = `it's ${formatNameCorrectly(
+      sessionStorage.getItem("usernameEnemy")
+    )} turn`;
   }
 }
 
@@ -562,7 +572,9 @@ function addEventListenerForChangesAtTheGrid() {
         if (data["nextTurn"].clickedCell > 0) {
           isEnemiesTurn = data["nextTurn"].isPlayer1Turn;
           sessionStorage.setItem("drawnSymbol", data["nextTurn"].drawnSymbol);
-          document.getElementById(`cell${data["nextTurn"].clickedCell}`).click();
+          document
+            .getElementById(`cell${data["nextTurn"].clickedCell}`)
+            .click();
         }
       }
     });
@@ -580,29 +592,32 @@ function addEventListenerForChangesAtTheGrid() {
 }
 
 function openQuitWindow() {
-  const quitWindow = document.getElementById('quitWindow');
-  const quitGame = document.getElementById('quitGame');
-  const cancelQuitGame = document.getElementById('cancelQuitGame');
+  const quitWindow = document.getElementById("quitWindow");
+  const quitGame = document.getElementById("quitGame");
+  const cancelQuitGame = document.getElementById("cancelQuitGame");
 
-  quitWindow.classList.remove('hide');
-  
+  quitWindow.classList.remove("hide");
+
   setTimeout(() => {
     quitWindow.style.opacity = 1;
-    quitWindow.style.transform = 'scale(1)';
-  }, 10)
+    quitWindow.style.transform = "scale(1)";
+  }, 10);
 
-  quitGame.addEventListener('click', () => {
-    firebase.database().ref(`games/playing/${gameID}/quit`).update({
-      quit: true
-    });
+  quitGame.addEventListener("click", () => {
+    firebase
+      .database()
+      .ref(`games/playing/${gameID}/quit`)
+      .update({
+        quit: true
+      });
   });
 
-  cancelQuitGame.addEventListener('click', () => {
+  cancelQuitGame.addEventListener("click", () => {
     quitWindow.style.opacity = 0;
-    quitWindow.style.transform = 'scale(.6)';
+    quitWindow.style.transform = "scale(.6)";
 
     setTimeout(() => {
-      quitWindow.classList.add('hide');
+      quitWindow.classList.add("hide");
     }, 260);
   });
 }
@@ -613,56 +628,60 @@ function quitListener() {
   const playAgainBtn = document.getElementById("playAgainBtn");
   const buttonText = document.getElementById("playerAcceptedRematchText");
 
-  firebase.database().ref(`games/playing/${gameID}/quit`).on('value', snapshot => {  
-    if (snapshot.val() !== null) {
-      if (snapshot.val()['quit']) {
-        firebase
-          .database()
-          .ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`)
-          .set({
-            username: sessionStorage.getItem("username"),
-            uid: firebase.auth().currentUser.uid
-          });
+  firebase
+    .database()
+    .ref(`games/playing/${gameID}/quit`)
+    .on("value", snapshot => {
+      if (snapshot.val() !== null) {
+        if (snapshot.val()["quit"]) {
+          firebase
+            .database()
+            .ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`)
+            .set({
+              username: sessionStorage.getItem("username"),
+              uid: firebase.auth().currentUser.uid
+            });
 
-        firebase
-          .database()
-          .ref(`games/playing/${gameID}`)
-          .remove().then(() => {
-            gameID = '';
-          });
-  
-        symbol = '';
-        gameScreen.classList.add("hide");
-        signupScreen.classList.remove("hide");
-  
-        const quitWindow = document.getElementById('quitWindow');
-        quitWindow.style.opacity = 0;
-        quitWindow.style.transform = 'scale(.6)';
-  
-        setTimeout(() => {
-          quitWindow.classList.add('hide');
-        }, 260);
+          firebase
+            .database()
+            .ref(`games/playing/${gameID}`)
+            .remove()
+            .then(() => {
+              gameID = "";
+            });
 
-        while (gameWindow.firstChild) {
-          gameWindow.removeChild(gameWindow.firstChild);
+          symbol = "";
+          gameScreen.classList.add("hide");
+          signupScreen.classList.remove("hide");
+
+          const quitWindow = document.getElementById("quitWindow");
+          quitWindow.style.opacity = 0;
+          quitWindow.style.transform = "scale(.6)";
+
+          setTimeout(() => {
+            quitWindow.classList.add("hide");
+          }, 260);
+
+          while (gameWindow.firstChild) {
+            gameWindow.removeChild(gameWindow.firstChild);
+          }
+
+          buildGrid();
+          addEventListenersToCells();
+
+          playAgainBtn.isClicked = false;
+          isEnemiesTurn = false;
+          gameOver = false;
+          buttonText.textContent = "0/2";
+          resultText.textContent = "it's your turn";
         }
-
-        buildGrid();
-        addEventListenersToCells();
-
-        playAgainBtn.isClicked = false;
-        isEnemiesTurn = false;
-        gameOver = false;
-        buttonText.textContent = '0/2';
-        resultText.textContent = "it's your turn";
       }
-    }
-  });
+    });
 }
 
 function formatNameCorrectly(name) {
   if (name !== null) {
-    if (name.toLowerCase().charAt(name.length - 1) === 's') {
+    if (name.toLowerCase().charAt(name.length - 1) === "s") {
       return `${name}'`;
     } else {
       return `${name}'s`;
