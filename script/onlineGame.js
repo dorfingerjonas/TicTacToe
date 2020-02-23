@@ -514,9 +514,6 @@ function playAgain() {
   buttonText.textContent = "0/2";
   symbol = sessionStorage.getItem("symbol");
 
-  console.log(symbol);
-  console.log(isEnemiesTurn);
-
   if (symbol === "cross" && isEnemiesTurn) {
     resultText.textContent = "it's your turn";
   } else {
