@@ -90,6 +90,8 @@ window.addEventListener("load", () => {
           uid: user.uid
         });
 
+      sessionStorage.setItem('uid', user.uid);
+
       firebase
         .database()
         .ref("games/waitingPlayers/" + user.uid + "/gameRequest")
@@ -220,6 +222,10 @@ window.addEventListener("load", () => {
       signupScreen.classList.remove("hide");
       playersToChallenge.classList.remove("disable");
     } else {
+      firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uid')}`).remove().then(() => {
+        sessionStorage.removeItem('uid');
+      });
+
       signupScreen.classList.add("hide");
       playersToChallenge.classList.add("disable");
       signupScreen.classList.remove("hide");
