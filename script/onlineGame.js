@@ -548,10 +548,12 @@ function addEventListenerForChangesAtTheGrid() {
     .on("value", snapshot => {
       const data = snapshot.val();
 
-      if (data["nextTurn"].clickedCell > 0) {
-        isEnemiesTurn = data["nextTurn"].isPlayer1Turn;
-        sessionStorage.setItem("drawnSymbol", data["nextTurn"].drawnSymbol);
-        document.getElementById(`cell${data["nextTurn"].clickedCell}`).click();
+      if (data !== null) {
+        if (data["nextTurn"].clickedCell > 0) {
+          isEnemiesTurn = data["nextTurn"].isPlayer1Turn;
+          sessionStorage.setItem("drawnSymbol", data["nextTurn"].drawnSymbol);
+          document.getElementById(`cell${data["nextTurn"].clickedCell}`).click();
+        }
       }
     });
 
