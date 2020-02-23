@@ -81,7 +81,7 @@ window.addEventListener("load", () => {
     });
 
   firebase.auth().onAuthStateChanged(user => {
-    if (user && sessionStorage.getItem("username") !== null) {
+    if (user !== null && sessionStorage.getItem("username") !== null) {
       firebase
         .database()
         .ref("games/waitingPlayers/" + user.uid)
