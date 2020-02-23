@@ -23,8 +23,9 @@ body {
     cursor: pointer;
     user-select: none;
     transition: box-shadow 200ms ease-in-out;
-}
+  }
 
-.button:hover {
+  .button:hover {
     box-shadow: 0 0 0 0.25rem #35353580;
+  }
 }
