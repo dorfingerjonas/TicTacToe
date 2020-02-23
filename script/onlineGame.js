@@ -566,6 +566,59 @@ function addEventListenerForChangesAtTheGrid() {
       }
     });
 }
+function quitListener() {
+  const resultText = document.getElementById("resultText");
+  const gameWindow = document.getElementById("gameWindow");
+  const playAgainBtn = document.getElementById("playAgainBtn");
+  const buttonText = document.getElementById("playerAcceptedRematchText");
+
+  firebase.database().ref(`games/playing/${gameID}/quit`).on('value', snapshot => {  
+    if (snapshot.val() !== null) {
+      if (snapshot.val()['quit']) {
+        firebase
+          .database()
+          .ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`)
+          .set({
+            username: sessionStorage.getItem("username"),
+            uid: firebase.auth().currentUser.uid
+          });
+
+        firebase
+          .database()
+          .ref(`games/playing/${gameID}`)
+          .remove().then(() => {
+            gameID = '';
+          });
+  
+        symbol = '';
+        gameScreen.classList.add("hide");
+        signupScreen.classList.remove("hide");
+  
+        const quitWindow = document.getElementById('quitWindow');
+        quitWindow.style.opacity = 0;
+        quitWindow.style.transform = 'scale(.6)';
+  
+        setTimeout(() => {
+          quitWindow.classList.add('hide');
+        }, 260);
+
+        while (gameWindow.firstChild) {
+          gameWindow.removeChild(gameWindow.firstChild);
+        }
+
+        buildGrid();
+        addEventListenersToCells();
+
+        playAgainBtn.isClicked = false;
+        isEnemiesTurn = false;
+        gameOver = false;
+        buttonText.textContent = '0/2';
+        resultText.textContent = "it's your turn";
+      }
+    }
+  });
+}
+
 function formatNameCorrectly(name) {
   if (name.toLowerCase().charAt(name.length - 1) === 's') {
     return `${name}'`;
