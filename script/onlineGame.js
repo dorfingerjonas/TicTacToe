@@ -1,4 +1,3 @@
-let isXTurn = true;
 let gameOver = false;
 let symbol = "";
 let gameID = "";
@@ -172,6 +171,7 @@ window.addEventListener("load", () => {
 
               addEventListenerForChangesAtTheGrid();
               quitListener();
+              initResultText();
 
               signupScreen.classList.add("hide");
               gameScreen.classList.remove("hide");
@@ -206,8 +206,15 @@ window.addEventListener("load", () => {
               gameID = snapshot.val()["gameID"];
               signupScreen.classList.add("hide");
               gameScreen.classList.remove("hide");
+
+              firebase.database().ref(`games/playing/${gameID}/player1`).once('value').then((snapshot2) => {
+                sessionStorage.setItem('usernameEnemy', snapshot2.val()['username']);
+                sessionStorage.setItem('uidEnemy', snapshot2.val()['uid']);
+              });
+
               addEventListenerForChangesAtTheGrid();
               quitListener();
+              initResultText();
             }
           }
         });
@@ -312,9 +319,7 @@ function addEventListenersToCells() {
               drawCircle(cell);
               currSymbol = "circle";
               nextSymbol = "cross";
-              resultText.textContent = `it's ${formatNameCorrectly(
-                sessionStorage.getItem("usernameEnemy")
-              )} turn`;
+              resultText.textContent = "it's your turn";
             }
 
             saveDataIsAllowed = true;
@@ -330,13 +335,9 @@ function addEventListenersToCells() {
                 nextSymbol = "cross";
               }
 
-              if (nextSymbol === sessionStorage.getItem("symbol")) {
-                resultText.textContent = "it's your turn";
-              } else {
-                resultText.textContent = `it's ${formatNameCorrectly(
-                  sessionStorage.getItem("usernameEnemy")
-                )} turn`;
-              }
+              resultText.textContent = `it's ${formatNameCorrectly(
+                sessionStorage.getItem("usernameEnemy")
+              )} turn`;
 
               saveDataIsAllowed = true;
             }
@@ -513,7 +514,10 @@ function playAgain() {
   buttonText.textContent = "0/2";
   symbol = sessionStorage.getItem("symbol");
 
-  if (symbol === "cross" && isXTurn) {
+  console.log(symbol);
+  console.log(isEnemiesTurn);
+
+  if (symbol === "cross" && isEnemiesTurn) {
     resultText.textContent = "it's your turn";
   } else {
     resultText.textContent = `it's ${formatNameCorrectly(
@@ -704,5 +708,15 @@ function formatNameCorrectly(name) {
     }
   } else {
     return false;
+  }
+}
+
+function initResultText() {
+  if (symbol === "cross") {
+    resultText.textContent = "it's your turn";
+  } else {
+    resultText.textContent = `it's ${formatNameCorrectly(
+      sessionStorage.getItem("usernameEnemy")
+    )} turn`;
   }
 }
