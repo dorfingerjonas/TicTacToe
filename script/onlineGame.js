@@ -34,6 +34,7 @@ window.addEventListener("load", () => {
   const signupScreen = document.getElementById("signupScreen");
   const gameScreen = document.getElementById("gameScreen");
   const playersToChallenge = document.getElementById("playersToChallenge");
+  const quitGameRequest = document.getElementById('quitGameRequest');
 
   buildGrid();
   addEventListenersToCells();
