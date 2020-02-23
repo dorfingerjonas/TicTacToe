@@ -104,14 +104,6 @@ input:focus {
     user-select: none;
 }
 
-.playerHover {
-    transition: box-shadow 200ms ease-in-out;
-}
-
-.playerHover:hover {
-    box-shadow: 0 0 0 0.25rem #36363680;
-}
-
 #playersToChallenge p {
     margin: 0;
     font-size: 5vw;
