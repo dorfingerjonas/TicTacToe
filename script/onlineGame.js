@@ -566,6 +566,35 @@ function addEventListenerForChangesAtTheGrid() {
       }
     });
 }
+
+function openQuitWindow() {
+  const quitWindow = document.getElementById('quitWindow');
+  const quitGame = document.getElementById('quitGame');
+  const cancelQuitGame = document.getElementById('cancelQuitGame');
+
+  quitWindow.classList.remove('hide');
+  
+  setTimeout(() => {
+    quitWindow.style.opacity = 1;
+    quitWindow.style.transform = 'scale(1)';
+  }, 10)
+
+  quitGame.addEventListener('click', () => {
+    firebase.database().ref(`games/playing/${gameID}/quit`).update({
+      quit: true
+    });
+  });
+
+  cancelQuitGame.addEventListener('click', () => {
+    quitWindow.style.opacity = 0;
+    quitWindow.style.transform = 'scale(.6)';
+
+    setTimeout(() => {
+      quitWindow.classList.add('hide');
+    }, 260);
+  });
+}
+
 function quitListener() {
   const resultText = document.getElementById("resultText");
   const gameWindow = document.getElementById("gameWindow");
