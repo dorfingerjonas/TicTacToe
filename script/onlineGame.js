@@ -210,6 +210,7 @@ window.addEventListener("load", () => {
               signupScreen.classList.add("hide");
               gameScreen.classList.remove("hide");
               addEventListenerForChangesAtTheGrid();
+              quitListener();
             }
           }
         });
