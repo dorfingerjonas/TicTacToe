@@ -13,13 +13,18 @@ body {
 }
 
 .button {
+    background: #353535 !important;
     padding: 1.5vh;
     width: auto;
     text-align: center;
     background: transparent;
-    box-shadow: 1px 1px 4px 1px #4c6d91;
     border-radius: 5px;
-    font-size: 1.25vw;
+    font-size: 1.2vw;
     cursor: pointer;
     user-select: none;
+    transition: box-shadow 200ms ease-in-out;
+}
+
+.button:hover {
+    box-shadow: 0 0 0 0.25rem #35353580;
 }
