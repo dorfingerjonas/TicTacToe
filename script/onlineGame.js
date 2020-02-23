@@ -290,12 +290,12 @@ function addEventListenersToCells() {
               drawCross(cell);
               currSymbol = "cross";
               nextSymbol = "circle";
-              resultText.textContent = "it is circle's turn";
+              resultText.textContent = "it's your turn";
             } else if (sessionStorage.getItem("drawnSymbol") === "circle") {
               drawCircle(cell);
               currSymbol = "circle";
               nextSymbol = "cross";
-              resultText.textContent = `it is cross' turn`;
+              resultText.textContent = `it's ${formatNameCorrectly(sessionStorage.getItem('usernameEnemy'))} turn`;
             }
 
             saveDataIsAllowed = true;
@@ -305,12 +305,16 @@ function addEventListenersToCells() {
                 drawCross(cell);
                 currSymbol = "cross";
                 nextSymbol = "circle";
-                resultText.textContent = "it is circle's turn";
               } else {
                 drawCircle(cell);
                 currSymbol = "circle";
                 nextSymbol = "cross";
-                resultText.textContent = `it is cross' turn`;
+              }
+
+              if (nextSymbol === sessionStorage.getItem('symbol')) {
+                resultText.textContent = "it's your turn";
+              } else {
+                resultText.textContent = `it's ${formatNameCorrectly(sessionStorage.getItem('usernameEnemy'))} turn`;
               }
 
               saveDataIsAllowed = true;
@@ -486,7 +490,13 @@ function playAgain() {
   isEnemiesTurn = false;
   gameOver = false;
   buttonText.textContent = "0/2";
-  resultText.textContent = "cross' turn";
+  symbol = sessionStorage.getItem('symbol');
+
+  if (symbol === 'cross' && isXTurn) {
+    resultText.textContent = "it's your turn";
+  } else {
+    resultText.textContent = `it's ${formatNameCorrectly(sessionStorage.getItem('usernameEnemy'))} turn`;
+  }
 }
 
 function back() {
