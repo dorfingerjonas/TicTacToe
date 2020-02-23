@@ -6,7 +6,7 @@ body {
 @media screen and (max-aspect-ratio: 1/1) {
   h1 {
     width: 73vw;
-    text-align: justify;
+    text-align: center;
     font-size: 8vw;
   }
 
