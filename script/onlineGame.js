@@ -19,16 +19,6 @@ window.addEventListener("load", () => {
 
   firebase.initializeApp(firebaseConfig);
 
-  /**
-   *
-   *
-   *
-   * TODO: format game ending msg
-   * idea: pop up window with the symbl of the winner and user name
-   *
-   *
-   */
-
   const playAgainBtn = document.getElementById("playAgainBtn");
   const signUpBtn = document.getElementById("signUpBtn");
   const signupScreen = document.getElementById("signupScreen");
