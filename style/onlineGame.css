@@ -94,6 +94,7 @@ input:focus {
     margin: 5vh 0 0 0;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     align-items: center;
     transition: opacity 200ms ease-in-out;
 }
