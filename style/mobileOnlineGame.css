@@ -96,7 +96,7 @@ input:focus {
 
 #playersToChallenge .player {
     background: #353535;
-    padding: 1.75vh 1.75vw;
+    padding: 4vw 4.5vw;
     border-radius: 3px;
     text-align: center;
     user-select: none;
