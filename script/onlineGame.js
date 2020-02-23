@@ -216,6 +216,10 @@ window.addEventListener("load", () => {
       signupScreen.classList.add("hide");
       signupScreen.classList.remove("hide");
       playersToChallenge.classList.remove("disable");
+
+      for (const player of document.getElementById('playersToChallenge').getElementsByTagName('div')) {
+        player.classList.add('playerHover');
+      }
     } else {
       firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uid')}`).remove().then(() => {
         sessionStorage.removeItem('uid');
@@ -229,6 +233,10 @@ window.addEventListener("load", () => {
       sessionStorage.removeItem("usernameEnemy");
       sessionStorage.removeItem("uidEnemy");
       sessionStorage.removeItem("symbol");
+
+      for (const player of document.getElementById('playersToChallenge').getElementsByTagName('div')) {
+        player.classList.remove('playerHover');
+      }
     }
   });
 
@@ -552,14 +560,17 @@ function createWaitingPlayer(playerData) {
   name.textContent = playerData.username;
 
   player.addEventListener("click", () => {
-    firebase
+    if (firebase.auth().currentUser !== null) {
+      firebase
       .database()
       .ref("games/waitingPlayers/" + playerData.uid + "/gameRequest")
       .set({
         uid: firebase.auth().currentUser.uid
       });
+    }
   });
 
+  firebase.auth().currentUser !== null ? player.classList.add('playerHover') : () => {};
   player.classList.add("player");
   player.appendChild(name);
 
