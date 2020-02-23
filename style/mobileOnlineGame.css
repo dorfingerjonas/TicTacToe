@@ -34,11 +34,6 @@ body {
     font-size: 3vw;
     cursor: pointer;
     user-select: none;
-    transition: box-shadow 200ms ease-in-out;
-}
-
-.button:hover {
-    box-shadow: 0 0 0 0.3rem #1b364780;
 }
 
 #signupScreen {
@@ -107,11 +102,6 @@ input:focus {
     cursor: pointer;
     text-align: center;
     user-select: none;
-    transition: box-shadow 200ms ease-in-out;
-}
-
-#playersToChallenge .player:hover {
-    box-shadow: 0 0 0 0.25rem #36363680;
 }
 
 #playersToChallenge p {
@@ -170,20 +160,10 @@ input:focus {
 
 #acceptRequest, #cancelQuitGame {
     background: #1abc89;
-    transition: box-shadow 200ms ease-in-out;
-}
-
-#acceptRequest:hover, #cancelQuitGame:hover {
-    box-shadow: 0 0 0 0.3rem #1abc8980;
 }
 
 #declineRequest, #quitGame {
     background: #c02942;
-    transition: box-shadow 200ms ease-in-out;
-}
-
-#declineRequest:hover, #quitGame:hover {
-    box-shadow: 0 0 0 0.3rem #c2294280;
 }
 
 #quitHeadliner {
