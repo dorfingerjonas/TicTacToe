@@ -33,7 +33,7 @@ body {
     text-align: center;
     background: #1b3647;
     border-radius: 5px;
-    font-size: 3vw;
+    font-size: 4vw;
     user-select: none;
 }
 
@@ -185,4 +185,8 @@ input:focus {
 
 #signOutBtn {
     width: 70%;
+}
+
+#signOutBtn i {
+    transform: rotateZ(180deg);
 }
