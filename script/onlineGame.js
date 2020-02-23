@@ -566,3 +566,10 @@ function addEventListenerForChangesAtTheGrid() {
       }
     });
 }
+function formatNameCorrectly(name) {
+  if (name.toLowerCase().charAt(name.length - 1) === 's') {
+    return `${name}'`;
+  } else {
+    return `${name}'s`;
+  }
+}
