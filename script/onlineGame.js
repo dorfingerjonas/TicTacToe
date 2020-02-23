@@ -191,6 +191,9 @@ window.addEventListener("load", () => {
                   `games/waitingPlayers/${sessionStorage.getItem("uidEnemy")}`
                 )
                 .remove();
+
+                sessionStorage.setItem('symbol', 'cross');
+                symbol = sessionStorage.getItem('symbol');
             });
           }
         });
