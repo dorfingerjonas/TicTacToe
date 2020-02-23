@@ -240,9 +240,16 @@ function login() {
   if (username.value === "" || username.value === " ") {
     username.classList.add("errorInput");
   } else {
+    if (firebase.auth().currentUser !== null) {
+      firebase.database().ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`).remove().then(() => {
+        firebase.auth().signInAnonymously();
+      });
+    } else {
+      firebase.auth().signInAnonymously();
+    }
+
     username.classList.remove("errorInput");
     sessionStorage.setItem("username", username.value);
-    firebase.auth().signInAnonymously();
   }
 }
 
