@@ -43,6 +43,7 @@ window.addEventListener("load", () => {
 
   playAgainBtn.addEventListener("click", playAgainButton);
   signUpBtn.addEventListener("click", login);
+  quitGameRequest.addEventListener('click', openQuitWindow);
   window.addEventListener("keydown", ev => {
     if (ev.key === "Enter" && !signupScreen.className.includes("hide")) {
       login();
