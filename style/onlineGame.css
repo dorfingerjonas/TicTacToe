@@ -75,6 +75,10 @@ input:focus {
     border-color: red;
 }
 
+.errorInput:focus {
+    border-color: red;
+}
+
 #playersToChallengeWrapper {
     width: 70vw;
     text-align: center;
