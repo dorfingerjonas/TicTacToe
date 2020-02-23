@@ -174,6 +174,7 @@ window.addEventListener("load", () => {
                 });
 
               addEventListenerForChangesAtTheGrid();
+              quitListener();
 
               signupScreen.classList.add("hide");
               gameScreen.classList.remove("hide");
