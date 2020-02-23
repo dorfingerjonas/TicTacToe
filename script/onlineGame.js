@@ -661,9 +661,13 @@ function quitListener() {
 }
 
 function formatNameCorrectly(name) {
-  if (name.toLowerCase().charAt(name.length - 1) === 's') {
-    return `${name}'`;
+  if (name !== null) {
+    if (name.toLowerCase().charAt(name.length - 1) === 's') {
+      return `${name}'`;
+    } else {
+      return `${name}'s`;
+    }
   } else {
-    return `${name}'s`;
+    return false;
   }
 }
