@@ -93,7 +93,7 @@ input:focus {
     width: 100%;
     margin: 5vh 0 0 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
     align-items: center;
     transition: opacity 200ms ease-in-out;
@@ -102,6 +102,7 @@ input:focus {
 #playersToChallenge .player {
     background: #353535;
     padding: 1.75vh 1.75vw;
+    margin: 0 1vw;
     border-radius: 3px;
     cursor: not-allowed;
     text-align: center;
@@ -122,7 +123,7 @@ input:focus {
     user-select: none;
 }
 
-#requestWindow, #quitWindow {
+#requestWindow {
     position: absolute;
     width: 45vw;
     height: 52vh;
@@ -189,10 +190,36 @@ input:focus {
 }
 
 #quitWindow {
-    height: 70vh;
-    top: 17vh;
+    position: absolute;
+    width: 45vw;
+    height: 40vh;
+    top: 30vh;
+    left: 27.5vw;
+    background: #fff;
+    color: black;
+    border-radius: 7px;
+    font-size: 1.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transform: scale(.6);
+    z-index: 101;
+    transition: 250ms opacity ease-in-out, 250ms transform ease-in-out;
 }
 
 #signOutBtn {
     width: 20%;
+}
+
+.disableWindow {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #00000055;
+    z-index: 99;
+    transition: 250ms opacity ease-in-out;
 }

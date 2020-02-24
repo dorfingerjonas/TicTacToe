@@ -47,6 +47,7 @@ body {
 }
 
 #signupScreen h1 {
+    width: 80%;
     position: relative;
     top: -15vh;
     text-align: center;
@@ -111,7 +112,7 @@ input:focus {
     user-select: none;
 }
 
-#requestWindow, #quitWindow {
+#requestWindow {
     position: absolute;
     width: 90vw;
     height: 50vh;
@@ -127,6 +128,7 @@ input:focus {
     flex-direction: column;
     opacity: 0;
     transform: scale(.6);
+    z-index: 101;
     transition: 250ms opacity ease-in-out, 250ms transform ease-in-out;
 }
 
@@ -167,16 +169,34 @@ input:focus {
 }
 
 #quitHeadliner {
+    width: 80%;
+    padding: 0 10%;
     text-align: center;
 }
 
 #quitWindow p {
+    font-size: 4.5vw;
+    width: 80%;
+    padding: 0 10%;
     text-align: center;
 }
 
 #quitWindow {
-    height: 70vh;
-    top: 15vh;
+    position: absolute;
+    width: 86vw;
+    height: 50vh;
+    top: 25vh;
+    left: 7vw;
+    background: #fff;
+    color: black;
+    border-radius: 7px;
+    font-size: 4vw;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: scale(.6);
+    z-index: 101;
+    transition: 250ms opacity ease-in-out, 250ms transform ease-in-out;
 }
 
 #playAgainBtn, #quitGameRequest {
@@ -189,4 +209,15 @@ input:focus {
 
 #signOutBtn i {
     transform: rotateZ(180deg);
+}
+
+.disableWindow {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #00000055;
+    z-index: 99;
+    transition: 250ms opacity ease-in-out;
 }

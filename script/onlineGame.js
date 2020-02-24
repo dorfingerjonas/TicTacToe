@@ -25,6 +25,8 @@ window.addEventListener("load", () => {
   const playersToChallenge = document.getElementById("playersToChallenge");
   const quitGameRequest = document.getElementById("quitGameRequest");
   const signOutBtn = document.getElementById('signOutBtn');
+  const disableWindow = document.getElementById('disableWindow');
+  const disableReqWindow = document.getElementById('disableRequestWindow'); 
 
   buildGrid();
   addEventListenersToCells();
@@ -34,6 +36,8 @@ window.addEventListener("load", () => {
   playAgainBtn.addEventListener("click", playAgainButton);
   signUpBtn.addEventListener("click", login);
   quitGameRequest.addEventListener("click", openQuitWindow);
+  disableWindow.addEventListener('click', disableQuitWindow);
+  disableReqWindow.addEventListener('click', disableRequestWindow);
   signOutBtn.addEventListener('click', () => {
     firebase.auth().signOut();
   });
@@ -95,6 +99,7 @@ window.addEventListener("load", () => {
             const requestText = document.getElementById("requestText");
             const acceptRequest = document.getElementById("acceptRequest");
             const declineRequest = document.getElementById("declineRequest");
+            const disableWindow = document.getElementById('disableRequestWindow');
             const request = [];
 
             for (const index in snapshot.val()) {
@@ -110,6 +115,7 @@ window.addEventListener("load", () => {
                   snapshot2.val().username
                 } wants to play with you!`;
                 requestWindow.classList.remove("hide");
+                disableWindow.classList.remove('hide');
                 sessionStorage.setItem(
                   "usernameEnemy",
                   snapshot2.val().username
@@ -119,15 +125,18 @@ window.addEventListener("load", () => {
                 setTimeout(() => {
                   requestWindow.style.opacity = 1;
                   requestWindow.style.transform = "scale(1)";
+                  disableWindow.style.opacity = 1;
                 }, 10);
               });
 
             declineRequest.addEventListener("click", () => {
               requestWindow.style.opacity = 0;
+              disableWindow.style.opacity = 0;
               requestWindow.style.transform = "scale(.6)";
 
               setTimeout(() => {
                 requestWindow.classList.add("hide");
+                disableWindow.classList.add("hide");
               }, 300);
 
               firebase
@@ -605,12 +614,15 @@ function openQuitWindow() {
   const quitWindow = document.getElementById("quitWindow");
   const quitGame = document.getElementById("quitGame");
   const cancelQuitGame = document.getElementById("cancelQuitGame");
+  const disableWindow = document.getElementById('disableWindow');
 
   quitWindow.classList.remove("hide");
+  disableWindow.classList.remove("hide");
 
   setTimeout(() => {
     quitWindow.style.opacity = 1;
     quitWindow.style.transform = "scale(1)";
+    disableWindow.style.opacity = 1;
   }, 10);
 
   quitGame.addEventListener("click", () => {
@@ -620,14 +632,19 @@ function openQuitWindow() {
       .update({
         quit: true
       });
+
+      disableWindow.classList.add("hide");
+      disableWindow.style.opacity = 0;
   });
 
   cancelQuitGame.addEventListener("click", () => {
     quitWindow.style.opacity = 0;
     quitWindow.style.transform = "scale(.6)";
+    disableWindow.style.opacity = 0;
 
     setTimeout(() => {
       quitWindow.classList.add("hide");
+      disableWindow.classList.add("hide");
     }, 260);
   });
 }
@@ -709,4 +726,16 @@ function initResultText() {
       sessionStorage.getItem("usernameEnemy")
     )} turn`;
   }
+}
+
+function disableQuitWindow() {
+  const cancelQuitGame = document.getElementById("cancelQuitGame");
+
+  cancelQuitGame.click();
+}
+
+function disableRequestWindow() {
+  const declineRequest = document.getElementById("declineRequest");
+
+  declineRequest.click();
 }
