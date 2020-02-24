@@ -214,6 +214,10 @@ input:focus {
     width: 20%;
 }
 
+#signOutBtn i {
+    transform: rotateZ(180deg);
+}
+
 .disableWindow {
     width: 100vw;
     height: 100vh;
@@ -223,4 +227,25 @@ input:focus {
     background: #00000055;
     z-index: 99;
     transition: 250ms opacity ease-in-out;
+}
+
+#feedbackText {
+    position: absolute;
+    bottom: 5vh;
+    max-width: 40%;
+    padding: 1.3vh 1.2vw;
+    text-align: center;
+    font-size: 1.2vw;
+    border-radius: 5px;
+    opacity: 0;
+    transform: scale(1.2);
+    user-select: none;
+    z-index: 199;
+    transition: 100ms opacity ease-in-out, 100ms transform ease-in-out;
+}
+
+#usernameField {
+    position: absolute;
+    top: 0;
+    right: 3vw;
 }
