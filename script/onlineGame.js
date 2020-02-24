@@ -237,6 +237,9 @@ window.addEventListener("load", () => {
       for (const player of document.getElementById('playersToChallenge').getElementsByTagName('div')) {
         player.classList.add('playerHover');
       }
+
+      usernameField.textContent = `username: ${sessionStorage.getItem('username')}`;
+      document.getElementById("usernameInput").value = sessionStorage.getItem('username');
     } else {
       firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uid')}`).remove().then(() => {
         sessionStorage.removeItem('uid');
@@ -254,6 +257,8 @@ window.addEventListener("load", () => {
       for (const player of document.getElementById('playersToChallenge').getElementsByTagName('div')) {
         player.classList.remove('playerHover');
       }
+
+      usernameField.innerHTML = '&nbsp;';
     }
   });
 
