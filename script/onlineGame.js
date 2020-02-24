@@ -41,6 +41,8 @@ window.addEventListener("load", () => {
   disableReqWindow.addEventListener('click', disableRequestWindow);
   signOutBtn.addEventListener('click', () => {
     firebase.auth().signOut();
+
+    displayUserFeedback('signed out successfully!', 'white', 3, '#353535');
   });
 
   window.addEventListener("keydown", ev => {
@@ -577,6 +579,8 @@ function createWaitingPlayer(playerData) {
         uid: firebase.auth().currentUser.uid
       });
     }
+
+    displayUserFeedback(`a game request was sent to ${playerData.username}.` , 'white', 2.5, '#353535');
   });
 
   firebase.auth().currentUser !== null ? player.classList.add('playerHover') : () => {};
@@ -636,7 +640,8 @@ function openQuitWindow() {
       .database()
       .ref(`games/playing/${gameID}/quit`)
       .update({
-        quit: true
+        quit: true,
+        username: sessionStorage.getItem('username')
       });
 
       disableWindow.classList.add("hide");
@@ -701,6 +706,10 @@ function quitListener() {
 
           buildGrid();
           addEventListenersToCells();
+          
+          if (snapshot.val()["username"] !== sessionStorage.getItem('username')) {
+            displayUserFeedback(`${sessionStorage.getItem('usernameEnemy')} has left the game`, 'white', 4.5, '#353535');
+          }
 
           playAgainBtn.isClicked = false;
           isEnemiesTurn = false;
