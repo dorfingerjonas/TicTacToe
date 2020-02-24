@@ -740,3 +740,29 @@ function disableRequestWindow() {
 
   declineRequest.click();
 }
+
+function displayUserFeedback(text, color, duration, background) {
+  const feedbackText = document.getElementById('feedbackText');
+
+  background = background || 'transparent';
+
+  feedbackText.textContent = text;
+  feedbackText.style.color = color;
+  feedbackText.style.backgroundColor = background;
+
+  feedbackText.classList.remove('hide');
+
+  setTimeout(() => {
+    feedbackText.style.opacity = 1;
+    feedbackText.style.transform = 'scale(1)';
+  }, 10);
+
+  setTimeout(() => {
+    feedbackText.style.opacity = 0;
+    feedbackText.style.transform = 'scale(1.2)';
+    
+    setTimeout(() => {
+      feedbackText.classList.add('hide');
+    }, 120);
+  }, duration * 1000);
+}
