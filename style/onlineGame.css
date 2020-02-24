@@ -139,6 +139,7 @@ input:focus {
     flex-direction: column;
     opacity: 0;
     transform: scale(.6);
+    z-index: 101;
     transition: 250ms opacity ease-in-out, 250ms transform ease-in-out;
 }
 
