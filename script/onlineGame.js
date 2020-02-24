@@ -27,6 +27,7 @@ window.addEventListener("load", () => {
   const signOutBtn = document.getElementById('signOutBtn');
   const disableWindow = document.getElementById('disableWindow');
   const disableReqWindow = document.getElementById('disableRequestWindow'); 
+  const usernameField = document.getElementById('usernameField');
 
   buildGrid();
   addEventListenersToCells();
