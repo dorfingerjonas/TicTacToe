@@ -210,11 +210,11 @@ window.addEventListener("load", () => {
               firebase.database().ref(`games/playing/${gameID}/player1`).once('value').then((snapshot2) => {
                 sessionStorage.setItem('usernameEnemy', snapshot2.val()['username']);
                 sessionStorage.setItem('uidEnemy', snapshot2.val()['uid']);
+                initResultText();
               });
 
               addEventListenerForChangesAtTheGrid();
               quitListener();
-              initResultText();
             }
           }
         });
@@ -507,20 +507,13 @@ function playAgain() {
 
   buildGrid();
   addEventListenersToCells();
+  initResultText();
 
   playAgainBtn.isClicked = false;
   isEnemiesTurn = false;
   gameOver = false;
   buttonText.textContent = "0/2";
   symbol = sessionStorage.getItem("symbol");
-
-  if (symbol === "cross" && isEnemiesTurn) {
-    resultText.textContent = "it's your turn";
-  } else {
-    resultText.textContent = `it's ${formatNameCorrectly(
-      sessionStorage.getItem("usernameEnemy")
-    )} turn`;
-  }
 }
 
 function back() {
@@ -585,7 +578,7 @@ function addEventListenerForChangesAtTheGrid() {
     .on("value", snapshot => {
       const data = snapshot.val();
 
-      if (data !== null) {
+      if (data !== null && data["nextTurn"] !== undefined) {
         if (data["nextTurn"].clickedCell > 0) {
           isEnemiesTurn = data["nextTurn"].isPlayer1Turn;
           sessionStorage.setItem("drawnSymbol", data["nextTurn"].drawnSymbol);
