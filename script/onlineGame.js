@@ -43,6 +43,7 @@ window.addEventListener("load", () => {
     firebase.auth().signOut();
 
     displayUserFeedback('signed out successfully!', 'white', 3, '#353535');
+    document.getElementById("usernameInput").classList.remove("errorInput");
   });
 
   window.addEventListener("keydown", ev => {
