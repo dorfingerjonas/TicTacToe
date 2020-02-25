@@ -83,6 +83,7 @@ window.addEventListener("load", () => {
 
   firebase.auth().onAuthStateChanged(user => {
     if (user !== null && sessionStorage.getItem("username") !== null) {
+      // insert userdata (username & uid) into the waiting players list
       firebase
         .database()
         .ref("games/waitingPlayers/" + user.uid)
@@ -93,6 +94,7 @@ window.addEventListener("load", () => {
 
       sessionStorage.setItem('uid', user.uid);
 
+      // listen if a game request was sent to me
       firebase
         .database()
         .ref("games/waitingPlayers/" + user.uid + "/gameRequest")
@@ -207,6 +209,7 @@ window.addEventListener("load", () => {
           }
         });
 
+      // when game starts will this code be executed (for the player who sent a game request)
       firebase
         .database()
         .ref("games/waitingPlayers/" + user.uid + "/newGame")
@@ -240,7 +243,9 @@ window.addEventListener("load", () => {
         player.classList.add('playerHover');
       }
 
+      // display username on screen
       usernameField.textContent = `username: ${sessionStorage.getItem('username')}`;
+      // set value of username input to the current username
       document.getElementById("usernameInput").value = sessionStorage.getItem('username');
     } else {
       firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uid')}`).remove().then(() => {
