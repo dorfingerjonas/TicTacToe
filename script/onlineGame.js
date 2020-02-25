@@ -622,14 +622,14 @@ function createWaitingPlayer(playerData) {
         .set({
           uid: firebase.auth().currentUser.uid
         });
-    }
 
-    displayUserFeedback(
-      `a game request was sent to ${playerData.username}.`,
-      "white",
-      2.5,
-      "#353535"
-    );
+      displayUserFeedback(
+        `a game request was sent to ${playerData.username}.`,
+        "white",
+        2.5,
+        "#353535"
+      );
+    }
   });
 
   firebase.auth().currentUser !== null
