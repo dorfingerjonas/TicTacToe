@@ -58,6 +58,15 @@ footer a {
     flex-direction: row;
 }
 
-.gamemode i {
+.gamemode img {
     margin: 0 2vw 0 0;
+    width: 5vw;
+}
+
+#robot {
+    width: 6.5vw;
+}
+
+#mobile {
+    width: 4vw;
 }
