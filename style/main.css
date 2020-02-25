@@ -27,4 +27,6 @@ a {
 
 .disable {
     opacity: .4 !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
 }

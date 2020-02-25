@@ -239,22 +239,31 @@ window.addEventListener("load", () => {
       signupScreen.classList.remove("hide");
       playersToChallenge.classList.remove("disable");
 
+      // add every player css class
       for (const player of document.getElementById('playersToChallenge').getElementsByTagName('div')) {
         player.classList.add('playerHover');
       }
 
       // display username on screen
       usernameField.textContent = `username: ${sessionStorage.getItem('username')}`;
+
       // set value of username input to the current username
       document.getElementById("usernameInput").value = sessionStorage.getItem('username');
+
+      // disable signup button
+      signUpBtn.classList.add('disable');
     } else {
+        // delete userdata from waiting players list
       firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uid')}`).remove().then(() => {
         sessionStorage.removeItem('uid');
       });
 
+      // change classLists of elements
       signupScreen.classList.add("hide");
       playersToChallenge.classList.add("disable");
       signupScreen.classList.remove("hide");
+
+      // remove all items from sessionStorage
       sessionStorage.removeItem("username");
       sessionStorage.removeItem("drawnSymbol");
       sessionStorage.removeItem("usernameEnemy");
@@ -265,7 +274,11 @@ window.addEventListener("load", () => {
         player.classList.remove('playerHover');
       }
 
+      // reset username field
       usernameField.innerHTML = '&nbsp;';
+
+      // enable signup button
+      signUpBtn.classList.remove('disable');
     }
   });
 
@@ -277,25 +290,27 @@ window.addEventListener("load", () => {
 });
 
 function login() {
-  const username = document.getElementById("usernameInput");
+  if (!document.getElementById("signUpBtn").className.includes('disable')) {
+    const username = document.getElementById("usernameInput");
 
-  if (username.value === "" || username.value === " ") {
-    username.classList.add("errorInput");
-  } else {
-    if (firebase.auth().currentUser !== null) {
-      firebase
-        .database()
-        .ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`)
-        .remove()
-        .then(() => {
-          firebase.auth().signInAnonymously();
-        });
+    if (username.value === "" || username.value === " ") {
+      username.classList.add("errorInput");
     } else {
-      firebase.auth().signInAnonymously();
-    }
+      if (firebase.auth().currentUser !== null) {
+        firebase
+          .database()
+          .ref(`games/waitingPlayers/${firebase.auth().currentUser.uid}`)
+          .remove()
+          .then(() => {
+            firebase.auth().signInAnonymously();
+          });
+      } else {
+        firebase.auth().signInAnonymously();
+      }
 
-    username.classList.remove("errorInput");
-    sessionStorage.setItem("username", username.value);
+      username.classList.remove("errorInput");
+      sessionStorage.setItem("username", username.value);
+    }
   }
 }
 

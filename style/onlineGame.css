@@ -33,7 +33,7 @@ body {
     font-size: 1.2vw;
     cursor: pointer;
     user-select: none;
-    transition: box-shadow 200ms ease-in-out;
+    transition: box-shadow 200ms ease-in-out, opacity 200ms ease-in-out;
 }
 
 .button:hover {
