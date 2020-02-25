@@ -24,10 +24,10 @@ window.addEventListener("load", () => {
   const gameScreen = document.getElementById("gameScreen");
   const playersToChallenge = document.getElementById("playersToChallenge");
   const quitGameRequest = document.getElementById("quitGameRequest");
-  const signOutBtn = document.getElementById('signOutBtn');
-  const disableWindow = document.getElementById('disableWindow');
-  const disableReqWindow = document.getElementById('disableRequestWindow'); 
-  const usernameField = document.getElementById('usernameField');
+  const signOutBtn = document.getElementById("signOutBtn");
+  const disableWindow = document.getElementById("disableWindow");
+  const disableReqWindow = document.getElementById("disableRequestWindow");
+  const usernameField = document.getElementById("usernameField");
 
   buildGrid();
   addEventListenersToCells();
@@ -37,12 +37,12 @@ window.addEventListener("load", () => {
   playAgainBtn.addEventListener("click", playAgainButton);
   signUpBtn.addEventListener("click", login);
   quitGameRequest.addEventListener("click", openQuitWindow);
-  disableWindow.addEventListener('click', disableQuitWindow);
-  disableReqWindow.addEventListener('click', disableRequestWindow);
-  signOutBtn.addEventListener('click', () => {
+  disableWindow.addEventListener("click", disableQuitWindow);
+  disableReqWindow.addEventListener("click", disableRequestWindow);
+  signOutBtn.addEventListener("click", () => {
     firebase.auth().signOut();
 
-    displayUserFeedback('signed out successfully!', 'white', 3, '#353535');
+    displayUserFeedback("signed out successfully!", "white", 3, "#353535");
     document.getElementById("usernameInput").classList.remove("errorInput");
   });
 
@@ -93,7 +93,7 @@ window.addEventListener("load", () => {
           uid: user.uid
         });
 
-      sessionStorage.setItem('uid', user.uid);
+      sessionStorage.setItem("uid", user.uid);
 
       // listen if a game request was sent to me
       firebase
@@ -105,7 +105,9 @@ window.addEventListener("load", () => {
             const requestText = document.getElementById("requestText");
             const acceptRequest = document.getElementById("acceptRequest");
             const declineRequest = document.getElementById("declineRequest");
-            const disableWindow = document.getElementById('disableRequestWindow');
+            const disableWindow = document.getElementById(
+              "disableRequestWindow"
+            );
             const request = [];
 
             for (const index in snapshot.val()) {
@@ -121,7 +123,7 @@ window.addEventListener("load", () => {
                   snapshot2.val().username
                 } wants to play with you!`;
                 requestWindow.classList.remove("hide");
-                disableWindow.classList.remove('hide');
+                disableWindow.classList.remove("hide");
                 sessionStorage.setItem(
                   "usernameEnemy",
                   snapshot2.val().username
@@ -223,11 +225,18 @@ window.addEventListener("load", () => {
               signupScreen.classList.add("hide");
               gameScreen.classList.remove("hide");
 
-              firebase.database().ref(`games/playing/${gameID}/player1`).once('value').then((snapshot2) => {
-                sessionStorage.setItem('usernameEnemy', snapshot2.val()['username']);
-                sessionStorage.setItem('uidEnemy', snapshot2.val()['uid']);
-                initResultText();
-              });
+              firebase
+                .database()
+                .ref(`games/playing/${gameID}/player1`)
+                .once("value")
+                .then(snapshot2 => {
+                  sessionStorage.setItem(
+                    "usernameEnemy",
+                    snapshot2.val()["username"]
+                  );
+                  sessionStorage.setItem("uidEnemy", snapshot2.val()["uid"]);
+                  initResultText();
+                });
 
               addEventListenerForChangesAtTheGrid();
               quitListener();
@@ -241,23 +250,33 @@ window.addEventListener("load", () => {
       playersToChallenge.classList.remove("disable");
 
       // add every player css class
-      for (const player of document.getElementById('playersToChallenge').getElementsByTagName('div')) {
-        player.classList.add('playerHover');
+      for (const player of document
+        .getElementById("playersToChallenge")
+        .getElementsByTagName("div")) {
+        player.classList.add("playerHover");
       }
 
       // display username on screen
-      usernameField.textContent = `username: ${sessionStorage.getItem('username')}`;
+      usernameField.textContent = `username: ${sessionStorage.getItem(
+        "username"
+      )}`;
 
       // set value of username input to the current username
-      document.getElementById("usernameInput").value = sessionStorage.getItem('username');
+      document.getElementById("usernameInput").value = sessionStorage.getItem(
+        "username"
+      );
 
       // disable signup button
-      signUpBtn.classList.add('disable');
+      signUpBtn.classList.add("disable");
     } else {
-        // delete userdata from waiting players list
-      firebase.database().ref(`games/waitingPlayers/${sessionStorage.getItem('uid')}`).remove().then(() => {
-        sessionStorage.removeItem('uid');
-      });
+      // delete userdata from waiting players list
+      firebase
+        .database()
+        .ref(`games/waitingPlayers/${sessionStorage.getItem("uid")}`)
+        .remove()
+        .then(() => {
+          sessionStorage.removeItem("uid");
+        });
 
       // change classLists of elements
       signupScreen.classList.add("hide");
@@ -271,15 +290,17 @@ window.addEventListener("load", () => {
       sessionStorage.removeItem("uidEnemy");
       sessionStorage.removeItem("symbol");
 
-      for (const player of document.getElementById('playersToChallenge').getElementsByTagName('div')) {
-        player.classList.remove('playerHover');
+      for (const player of document
+        .getElementById("playersToChallenge")
+        .getElementsByTagName("div")) {
+        player.classList.remove("playerHover");
       }
 
       // reset username field
-      usernameField.innerHTML = '&nbsp;';
+      usernameField.innerHTML = "&nbsp;";
 
       // enable signup button
-      signUpBtn.classList.remove('disable');
+      signUpBtn.classList.remove("disable");
     }
   });
 
@@ -291,7 +312,7 @@ window.addEventListener("load", () => {
 });
 
 function login() {
-  if (!document.getElementById("signUpBtn").className.includes('disable')) {
+  if (!document.getElementById("signUpBtn").className.includes("disable")) {
     const username = document.getElementById("usernameInput");
 
     if (username.value === "" || username.value === " ") {
@@ -398,7 +419,8 @@ function addEventListenersToCells() {
 
             if (areThreeInARow[0]) {
               gameOver = true;
-              resultText.textContent = `${currSymbol} has won.`;
+              resultText.innerHTML = "&nbsp;";
+              showWinner(currSymbol);
               setTimeout(() => {
                 delightLosingRows(areThreeInARow);
               }, 500);
@@ -406,7 +428,8 @@ function addEventListenersToCells() {
 
             setTimeout(() => {
               if (checkIfGameIsDraw() && !gameOver) {
-                resultText.textContent = `draw, no one has won.`;
+                resultText.innerHTML = "&nbsp;";
+                currSymbol("draw");
                 gameOver = true;
               }
             }, 550);
@@ -594,17 +617,24 @@ function createWaitingPlayer(playerData) {
   player.addEventListener("click", () => {
     if (firebase.auth().currentUser !== null) {
       firebase
-      .database()
-      .ref("games/waitingPlayers/" + playerData.uid + "/gameRequest")
-      .set({
-        uid: firebase.auth().currentUser.uid
-      });
+        .database()
+        .ref("games/waitingPlayers/" + playerData.uid + "/gameRequest")
+        .set({
+          uid: firebase.auth().currentUser.uid
+        });
     }
 
-    displayUserFeedback(`a game request was sent to ${playerData.username}.` , 'white', 2.5, '#353535');
+    displayUserFeedback(
+      `a game request was sent to ${playerData.username}.`,
+      "white",
+      2.5,
+      "#353535"
+    );
   });
 
-  firebase.auth().currentUser !== null ? player.classList.add('playerHover') : () => {};
+  firebase.auth().currentUser !== null
+    ? player.classList.add("playerHover")
+    : () => {};
   player.classList.add("player");
   player.appendChild(name);
 
@@ -645,7 +675,7 @@ function openQuitWindow() {
   const quitWindow = document.getElementById("quitWindow");
   const quitGame = document.getElementById("quitGame");
   const cancelQuitGame = document.getElementById("cancelQuitGame");
-  const disableWindow = document.getElementById('disableWindow');
+  const disableWindow = document.getElementById("disableWindow");
 
   quitWindow.classList.remove("hide");
   disableWindow.classList.remove("hide");
@@ -662,11 +692,11 @@ function openQuitWindow() {
       .ref(`games/playing/${gameID}/quit`)
       .update({
         quit: true,
-        username: sessionStorage.getItem('username')
+        username: sessionStorage.getItem("username")
       });
 
-      disableWindow.classList.add("hide");
-      disableWindow.style.opacity = 0;
+    disableWindow.classList.add("hide");
+    disableWindow.style.opacity = 0;
   });
 
   cancelQuitGame.addEventListener("click", () => {
@@ -727,9 +757,16 @@ function quitListener() {
 
           buildGrid();
           addEventListenersToCells();
-          
-          if (snapshot.val()["username"] !== sessionStorage.getItem('username')) {
-            displayUserFeedback(`${sessionStorage.getItem('usernameEnemy')} has left the game`, 'white', 4.5, '#353535');
+
+          if (
+            snapshot.val()["username"] !== sessionStorage.getItem("username")
+          ) {
+            displayUserFeedback(
+              `${sessionStorage.getItem("usernameEnemy")} has left the game`,
+              "white",
+              4.5,
+              "#353535"
+            );
           }
 
           playAgainBtn.isClicked = false;
@@ -777,27 +814,80 @@ function disableRequestWindow() {
 }
 
 function displayUserFeedback(text, color, duration, background) {
-  const feedbackText = document.getElementById('feedbackText');
+  const feedbackText = document.getElementById("feedbackText");
 
-  background = background || 'transparent';
+  background = background || "transparent";
 
   feedbackText.textContent = text;
   feedbackText.style.color = color;
   feedbackText.style.backgroundColor = background;
 
-  feedbackText.classList.remove('hide');
+  feedbackText.classList.remove("hide");
 
   setTimeout(() => {
     feedbackText.style.opacity = 1;
-    feedbackText.style.transform = 'scale(1)';
+    feedbackText.style.transform = "scale(1)";
   }, 10);
 
   setTimeout(() => {
     feedbackText.style.opacity = 0;
-    feedbackText.style.transform = 'scale(1.2)';
-    
+    feedbackText.style.transform = "scale(1.2)";
+
     setTimeout(() => {
-      feedbackText.classList.add('hide');
+      feedbackText.classList.add("hide");
     }, 120);
   }, duration * 1000);
+}
+
+function showWinner(winner) {
+  const winningScreen = document.getElementById("winningScreen");
+  const symbolWrapper = document.getElementById("symbolWrapper");
+  const winningText = document.getElementById("winningText");
+  const wrapperList = [
+    document.getElementById("gameWindow"),
+    document.getElementById("buttonBar"),
+    document.getElementById("resultBar")
+  ];
+
+  if (winner === "cross" || winner === "draw") {
+    drawCross(symbolWrapper);
+  }
+
+  if (winner === "circle" || winner === "draw") {
+    drawCircle(symbolWrapper);
+  }
+
+  if (symbolWrapper.childNodes.length === 1) {
+    winningText.textContent = "has won!";
+  } else if (symbolWrapper.childNodes.length > 1) {
+    winningText.textContent = "draw!";
+  }
+
+  setTimeout(() => {
+    for (const wrapper of wrapperList) {
+      wrapper.classList.add("fadeOut");
+    }
+
+    winningScreen.classList.remove("hide");
+
+    setTimeout(() => {
+      winningScreen.classList.add("fadeIn");
+    }, 10);
+
+    window.addEventListener("click", () => {
+      if (!winningScreen.className.includes("hide")) {
+        winningScreen.classList.remove("fadeIn");
+
+        setTimeout(() => {
+          // resetGame();
+
+          for (const wrapper of wrapperList) {
+            wrapper.classList.remove("fadeOut");
+          }
+
+          winningScreen.classList.add("hide");
+        }, 260);
+      }
+    });
+  }, 2000);
 }
