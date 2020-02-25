@@ -45,7 +45,7 @@ body {
     margin: 0 .5vw 0 0;
 }
 
-.button span {
+#signupScreen .button span {
     display: flex;
     justify-content: center;
 }
@@ -228,7 +228,7 @@ input:focus {
     width: 20%;
 }
 
-#signOutBtn i {
+#signOutBtn img {
     transform: rotateZ(180deg);
 }
 
