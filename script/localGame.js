@@ -199,8 +199,42 @@ function delightLosingRows(data) {
     for (let i = 0; i < 9; i++) {
         if (i + 1 != data[1][0] && i + 1 != data[1][1] && i + 1 != data[1][2]) {
             if (document.getElementById(`cell${i + 1}`).childNodes[0] !== undefined) {
-                document.getElementById(`cell${i + 1}`).childNodes[0].classList.add('lowlight');
-            }
+        document
+          .getElementById(`cell${i + 1}`)
+          .childNodes[0].classList.add("lowlight");
+      }
+    }
+  }
+}
+
+function showWinner(winner) {
+  const winningScreen = document.getElementById("winningScreen");
+  const symbolWrapper = document.getElementById("symbolWrapper");
+  const winningText = document.getElementById("winningText");
+  const wrapperList = [
+    document.getElementById("gameWindow"),
+    document.getElementById("buttonBar"),
+    document.getElementById("resultBar")
+  ];
+
+  if (winner === "cross" || winner === "draw") {
+    drawCross(symbolWrapper);
+  }
+
+  if (winner === "circle" || winner === "draw") {
+    drawCircle(symbolWrapper);
+  }
+
+  if (symbolWrapper.childNodes.length === 1) {
+    winningText.textContent = "has won!";
+  } else if (symbolWrapper.childNodes.length > 1) {
+    winningText.textContent = "draw!";
+  }
+
+  setTimeout(() => {
+    for (const wrapper of wrapperList) {
+      wrapper.classList.add("fadeOut");
+    }
         }
     }
 }
