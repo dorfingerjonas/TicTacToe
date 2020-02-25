@@ -113,6 +113,10 @@ input:focus {
     user-select: none;
 }
 
+#resultText {
+    text-align: center;
+}
+
 #requestWindow {
     position: absolute;
     width: 90vw;
