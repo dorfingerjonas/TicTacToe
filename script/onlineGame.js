@@ -429,7 +429,7 @@ function addEventListenersToCells() {
             setTimeout(() => {
               if (checkIfGameIsDraw() && !gameOver) {
                 resultText.innerHTML = "&nbsp;";
-                currSymbol("draw");
+                showWinner("draw");
                 gameOver = true;
               }
             }, 550);
