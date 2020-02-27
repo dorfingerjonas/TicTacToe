@@ -566,6 +566,11 @@ function playAgain() {
     gameWindow.removeChild(gameWindow.firstChild);
   }
 
+  const symbolWrapper = document.getElementById("symbolWrapper");
+
+  while (symbolWrapper.firstChild)
+    symbolWrapper.removeChild(symbolWrapper.firstChild);
+
   buildGrid();
   addEventListenersToCells();
   initResultText();
