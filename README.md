@@ -1,5 +1,5 @@
 # TicTacToe
 🎮 web based game, three different ways to play TicTacToe
 
-### Demo
+### Play it
 https://dorfingerjonas.github.io/TicTacToe/
