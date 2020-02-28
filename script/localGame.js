@@ -166,28 +166,32 @@ function checkThreeInOneRow(symbol) {
 function resetGame() {
   const resultText = document.getElementById("resultText");
 
-  for (let i = 0; i < 9; i++) {
-    const cell = document.getElementById(`cell${i + 1}`);
+  if (document.getElementById('winningScreen').className.includes('hide')) {
+    for (let i = 0; i < 9; i++) {
+      const cell = document.getElementById(`cell${i + 1}`);
 
-    cell.symbol = "";
-    cell.isUsed = false;
-    isXTurn = true;
-    gameOver = false;
+      cell.symbol = "";
+      cell.isUsed = false;
+      isXTurn = true;
+      gameOver = false;
 
-    while (cell.firstChild) cell.removeChild(cell.firstChild);
+      while (cell.firstChild) cell.removeChild(cell.firstChild);
 
-    resultText.innerHTML = "cross' turn";
+      resultText.innerHTML = "cross' turn";
+    }
+
+    const symbolWrapper = document.getElementById("symbolWrapper");
+
+    while (symbolWrapper.firstChild)
+      symbolWrapper.removeChild(symbolWrapper.firstChild);
   }
-
-  const symbolWrapper = document.getElementById("symbolWrapper");
-
-  while (symbolWrapper.firstChild)
-    symbolWrapper.removeChild(symbolWrapper.firstChild);
 }
 
 function back() {
-  document.getElementById("startScreen").classList.toggle("hide");
-  document.getElementById("localScreen").classList.toggle("hide");
+  if (document.getElementById('winningScreen').className.includes('hide')) {
+    document.getElementById("startScreen").classList.toggle("hide");
+    document.getElementById("localScreen").classList.toggle("hide");
+  }
 }
 
 function checkIfGameIsDraw() {
