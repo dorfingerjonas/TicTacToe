@@ -705,6 +705,10 @@ function openQuitWindow() {
   
       disableWindow.classList.add("hide");
       disableWindow.style.opacity = 0;
+      const symbolWrapper = document.getElementById("symbolWrapper");
+
+      while (symbolWrapper.firstChild)
+        symbolWrapper.removeChild(symbolWrapper.firstChild);
     });
   
     cancelQuitGame.addEventListener("click", () => {
@@ -783,6 +787,11 @@ function quitListener() {
           gameOver = false;
           buttonText.textContent = "0/2";
           resultText.textContent = "it's your turn";
+
+          const symbolWrapper = document.getElementById("symbolWrapper");
+
+          while (symbolWrapper.firstChild)
+            symbolWrapper.removeChild(symbolWrapper.firstChild);
         }
       }
     });
