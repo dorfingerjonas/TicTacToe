@@ -547,39 +547,41 @@ function playAgain() {
   const playAgainBtn = document.getElementById("playAgainBtn");
   const buttonText = document.getElementById("playerAcceptedRematchText");
 
-  firebase
-    .database()
-    .ref(`games/playing/${gameID}/nextTurn`)
-    .set({
-      clickedCell: -1,
-      isPlayer1Turn: true
-    });
+  if (document.getElementById('winningScreen').className.includes('hide')) {
+    firebase
+      .database()
+      .ref(`games/playing/${gameID}/nextTurn`)
+      .set({
+        clickedCell: -1,
+        isPlayer1Turn: true
+      });
 
-  firebase
-    .database()
-    .ref(`games/playing/${gameID}/playAgain`)
-    .set({
-      counter: 0
-    });
+    firebase
+      .database()
+      .ref(`games/playing/${gameID}/playAgain`)
+      .set({
+        counter: 0
+      });
 
-  while (gameWindow.firstChild) {
-    gameWindow.removeChild(gameWindow.firstChild);
+    while (gameWindow.firstChild) {
+      gameWindow.removeChild(gameWindow.firstChild);
+    }
+
+    const symbolWrapper = document.getElementById("symbolWrapper");
+
+    while (symbolWrapper.firstChild)
+      symbolWrapper.removeChild(symbolWrapper.firstChild);
+
+    buildGrid();
+    addEventListenersToCells();
+    initResultText();
+
+    playAgainBtn.isClicked = false;
+    isEnemiesTurn = false;
+    gameOver = false;
+    buttonText.textContent = "0/2";
+    symbol = sessionStorage.getItem("symbol");
   }
-
-  const symbolWrapper = document.getElementById("symbolWrapper");
-
-  while (symbolWrapper.firstChild)
-    symbolWrapper.removeChild(symbolWrapper.firstChild);
-
-  buildGrid();
-  addEventListenersToCells();
-  initResultText();
-
-  playAgainBtn.isClicked = false;
-  isEnemiesTurn = false;
-  gameOver = false;
-  buttonText.textContent = "0/2";
-  symbol = sessionStorage.getItem("symbol");
 }
 
 function back() {
@@ -682,38 +684,40 @@ function openQuitWindow() {
   const cancelQuitGame = document.getElementById("cancelQuitGame");
   const disableWindow = document.getElementById("disableWindow");
 
-  quitWindow.classList.remove("hide");
-  disableWindow.classList.remove("hide");
-
-  setTimeout(() => {
-    quitWindow.style.opacity = 1;
-    quitWindow.style.transform = "scale(1)";
-    disableWindow.style.opacity = 1;
-  }, 10);
-
-  quitGame.addEventListener("click", () => {
-    firebase
-      .database()
-      .ref(`games/playing/${gameID}/quit`)
-      .update({
-        quit: true,
-        username: sessionStorage.getItem("username")
-      });
-
-    disableWindow.classList.add("hide");
-    disableWindow.style.opacity = 0;
-  });
-
-  cancelQuitGame.addEventListener("click", () => {
-    quitWindow.style.opacity = 0;
-    quitWindow.style.transform = "scale(.6)";
-    disableWindow.style.opacity = 0;
-
+  if (document.getElementById('winningScreen').className.includes('hide')) {
+    quitWindow.classList.remove("hide");
+    disableWindow.classList.remove("hide");
+  
     setTimeout(() => {
-      quitWindow.classList.add("hide");
+      quitWindow.style.opacity = 1;
+      quitWindow.style.transform = "scale(1)";
+      disableWindow.style.opacity = 1;
+    }, 10);
+  
+    quitGame.addEventListener("click", () => {
+      firebase
+        .database()
+        .ref(`games/playing/${gameID}/quit`)
+        .update({
+          quit: true,
+          username: sessionStorage.getItem("username")
+        });
+  
       disableWindow.classList.add("hide");
-    }, 260);
-  });
+      disableWindow.style.opacity = 0;
+    });
+  
+    cancelQuitGame.addEventListener("click", () => {
+      quitWindow.style.opacity = 0;
+      quitWindow.style.transform = "scale(.6)";
+      disableWindow.style.opacity = 0;
+  
+      setTimeout(() => {
+        quitWindow.classList.add("hide");
+        disableWindow.classList.add("hide");
+      }, 260);
+    });
+  }
 }
 
 function quitListener() {
