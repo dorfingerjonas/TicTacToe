@@ -2,29 +2,45 @@
 <html lang="en">
 <head>
     <!-- General -->
-    <title>TicTacToe offline</title>
+    <title>TicTacToe local</title>
     <!-- meta Data -->
     <meta charset="UTF-8">
-    <meta name="theme-color" content="#fdc162">
+    <meta name="theme-color" content="#7bb7fa">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSS Files -->
     <link rel="stylesheet" href="../style/main.css">
-    <link rel="stylesheet" href="../style/progress.css">
-    <link rel="stylesheet" href="../style/loadingAnimation.css">
+    <link rel="stylesheet" href="../style/gameScreens.css">
+    <link rel="stylesheet" href="../style/grid.css" media="screen and (min-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/mobileGrid.css" media="screen and (max-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/cross.css" media="screen and (min-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/mobileCross.css" media="screen and (max-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/circle.css" media="screen and (min-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/mobileCircle.css" media="screen and (max-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/offlineGame.css" media="screen and (min-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/mobileOfflineGame.css" media="screen and (max-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/winningMessage.css" media="screen and (min-aspect-ratio: 1/1)">
+    <link rel="stylesheet" href="../style/mobileWinningMessage.css" media="screen and (max-aspect-ratio: 1/1)">
+    <!-- JavaScript Files -->
+    <script src="../script/offlineGame.js"></script>
 </head>
 <body>
-    <h1>This gamemode is currently in progress. It will be released very soon.</h1>
+    <div id="gameWindow"></div>
 
-    <div id="loader">
-        <div class="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+    <div id="buttonBar">
+        <a href="../index.html">
+            <div class="button">Back</div>
+        </a>
+        <div class="button" id="resetGameBtn">Reset Game</div>
     </div>
 
-    <a href="../index.html" class="button">back</a>
+    <div id="resultBar">
+        <p id="resultText">cross' turn</p>
+    </div>
+
+    <div id="winningScreen" class="hide">
+        <div id="symbolWrapper"></div>
+        <span id="winningText"> &nbsp; </span>
+    </div>
 </body>
 </html>
